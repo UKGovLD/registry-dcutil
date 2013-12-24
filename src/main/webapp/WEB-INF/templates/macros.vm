@@ -1,0 +1,84 @@
+## Global macros
+
+## Determine the href value to use in a link to the given resource, reference URIs go external
+#macro(linkhref $res)/resource?uri=$lib.pathEncode($res.uRI)#end
+
+## Inject a link to the given resource
+#macro(linkfor $res)
+   <a href="#linkhref($res)" title="$res.uRI">$res.label</a>
+#end
+
+## Render a value either as a link (if a resource) or as a (trimmed) lexical form
+#macro(render $v)
+      #if($v.isAnon())
+        []
+      #elseif($v.isResource())
+        #linkfor($v)
+      #else
+        $lib.escapeHtml($v.asLiteral().lexicalForm, 1000)
+      #end
+#end
+
+## Display a description for a resource if one is available, otherwise show the default (which can be empty)
+#macro(description $r $default)
+  #if($r.getPropertyValue("dct:description"))
+    <p>$r.getLocalizedValue("dct:description")</p>
+  #else$default#end
+#end
+
+## Inject a plain link for a resource - no encoding or mapping to the host
+#macro(link $uri)
+  <a href="$uri">$uri</a>
+#end
+
+## Display a property value in the RDF browser
+#macro(resentry $v)
+  #if($v.isList())
+    <ul>
+      #foreach($e in $v.asList())
+        <li>#resentry($e)</li>
+      #end
+    </ul>
+  #elseif($v.isAnon())
+    #restable($v)
+  #else
+    #render($v)
+  #end
+#end
+
+## Display a set of property/value pairs in the RDF browser
+#macro(restable $res $classes)
+  <table class="table $classes">
+##    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      #foreach($pv in $res.listProperties())
+        <tr>
+          <td> <strong title="$pv.getProp().uRI">$pv.getProp().label</strong> </td>
+          <td>
+            #foreach($v in $pv.getValues())
+              #if($v.isList())
+                  (#foreach($e in $v.asList())#resentry($e)#if( $foreach.hasNext ), #end#end)
+              #elseif($v.isAnon())
+                #restable($v)
+              #else
+                #resentry($v)
+              #end
+              #if( $foreach.hasNext )|#end
+              #if( $foreach.count > 8 ) ... #break #end
+            #end
+            <br />
+          </td>
+        </tr>
+      #end
+    </tbody>
+  </table>
+
+#end
+
+## Debug utility to display the roots of a model
+#macro(showmodel $model)
+  #foreach($root in $model.listSubjects())
+    <h4>Root: $root.uRI</h4>
+    #restable($root, "table-condensed table-bordered")
+  #end
+#end

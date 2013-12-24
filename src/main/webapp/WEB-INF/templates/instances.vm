@@ -1,0 +1,28 @@
+#parse("header.vm")
+#set($nav="instances")
+#parse("navbar.vm")
+
+#set($res = $source.getNode($uri))
+
+<h3>Instances of: #linkfor($res)</h3>
+
+<table class="table table-condensed">
+ <thead>
+   <tr>
+     <td>Instance</td>
+   </tr>
+ </thead>
+ <tbody>
+    #foreach($row in $source.label( $source.select("SELECT ?i WHERE {?i a ?c} ORDER BY ?i LIMIT 1000", "c", $uri) ))
+      <tr>
+        <td>#render($row.i)</td>
+      </tr>
+      #if( $foreach.count > 999 )
+         <tr><td>...</td></tr> 
+        #break  
+      #end
+    #end
+ </tbody>
+</table>
+
+#parse("footer.vm")

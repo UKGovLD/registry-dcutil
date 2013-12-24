@@ -1,0 +1,23 @@
+#parse("header.vm")
+#set($nav="classes")
+#parse("navbar.vm")
+
+<h1>Classes</h1>
+
+<table class="table table-condensed">
+ <thead>
+   <tr>
+     <td>Class</td><td>Instances</td>
+   </tr>
+ </thead>
+ <tbody>
+    #foreach($row in $source.label( $source.select("SELECT ?c (COUNT(?i) AS ?count) WHERE { ?i a ?c } GROUP BY ?c") ))
+      <tr>
+        <td>#render($row.c)</td>
+        <td><a href="/instances?uri=$lib.pathEncode($row.c.uRI)">$row.count.label</a></td>
+      </tr>
+    #end
+ </tbody>
+</table>
+
+#parse("footer.vm")

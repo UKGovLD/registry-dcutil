@@ -1,0 +1,17 @@
+#parse("header.vm")
+#set($nav="subjects")
+#parse("navbar.vm")
+
+<h1>Subjects</h1>
+
+<ul>
+  #foreach($r in $source.label( $source.select("SELECT DISTINCT ?s WHERE { ?s ?p ?o } ORDER BY ?s LIMIT 500") ))
+    <li>#render($r.s)</li>
+   #if( $foreach.count > 499 )
+     <li>...</li> 
+     #break  
+   #end
+  #end
+</ul>
+
+#parse("footer.vm")

@@ -1,0 +1,22 @@
+#parse("header.vm")
+#set($nav="instances")
+#parse("navbar.vm")
+
+<h3>Resources matching search: $query</h3>
+
+<table class="table table-condensed">
+ <thead>
+   <tr>
+     <td>Instance</td>
+   </tr>
+ </thead>
+ <tbody>
+    #foreach($r in $source.search($query))
+      <tr>
+        <td>#render($r)</td>
+      </tr>
+    #end
+ </tbody>
+</table>
+
+#parse("footer.vm")

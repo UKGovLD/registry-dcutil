@@ -1,0 +1,23 @@
+
+  <div class="navbar navbar-fixed-top">
+    <div class="span1">
+    </div>
+    <div class="navbar-inner">
+      <ul class="nav">
+        <li #if($nav=="root")class="active"#end><a class="brand popinfo" href="/$root" data-trigger="hover" data-placement="bottom"
+            data-content="Return to the registry home page.">
+         Mini browse</a></li>
+      </ul>
+      <div class="span1"> </div>
+      <ul class="nav">
+        <li #if($nav=="classes")class="active"#end><a href="classes">classes</a></li>
+        <li #if($nav=="subjects")class="active"#end><a href="subjects">subjects</a></li>
+      </ul>
+
+      <form action="$uiroot/text-search" method="get" class="navbar-search">
+        <input type="search" class="search-query" placeholder="Search" #if($query)value="$query"#end name="query"/>
+##             <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" />
+      </form>
+
+    </div>
+  </div>
