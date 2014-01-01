@@ -3,18 +3,7 @@
  */
 
 body {
-        background: white url(/ui/img/body_bg_big.png) repeat;
         min-height: 600px;
-        margin-top: 40px;
-}
-
-.container {
-        background-color: white;
-        -moz-box-shadow: 0 5px 24px #888;
-        -webkit-box-shadow: 0 5px 24px #888;
-        box-shadow: 0 5px 24px #888;
-        padding-left: 10px;
-        padding-right: 10px;
 }
 
 .table {
@@ -29,38 +18,20 @@ table tr td table {
    margin-top: 1em;
 }
 
-.footer {
-    font-size: 0.8em;
+.space-below {
+   margin-bottom: 1em;
+}
+
+footer {
+  font-size: 0.8em;
+  padding-top: 12px;
+  margin-top: 12px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
 }
 
 .nav-text {
     color: white;
-}
-
-.panel {
-/*   font-size: 80%;
-   line-spacing: 80%;  */
-}
-
-.panel-head {
-    background-color:  #222222;
-    color: lightgrey;
-    text-align: center;
-    -webkit-border-top-left-radius: 5px;
-    -webkit-border-top-right-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    height: 30px;
-    padding: 3px;
-}
-
-.panel-body {
-   border-left: 5px solid lightgrey;
-   border-right: 5px solid lightgrey;
-   border-bottom: 5px solid lightgrey;
-   padding: 4px;
 }
 
 .result-blob {
@@ -186,6 +157,29 @@ table tr td table {
     min-height: 30px;
 }
 
+td.align-right {
+    text-align: right;
+}
 
-   
+#metadata-content {
+    border-top: 1px solid lightgrey;
+}
 
+.ui-edit-main {
+    min-width: 350px;
+}
+
+/* Hierarchical list support */
+.hlist-entry {
+    min-width: 600px;
+    border: 1px solid lightgrey;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.hlist-child-box {
+    padding-left: 40px;
+}

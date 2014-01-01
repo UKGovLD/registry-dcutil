@@ -1,75 +1,38 @@
-// Set of initialization actions fun on page load to make UI features live
+// Set of initialization actions run on page load to make UI features live
 
 $(function() {
 
-    // Query forms run a target query and load the resulting HTML into a data-result element
-    var processQueryForms = function() {
-        $(".query-form").each(function() {
-            var target = $(this).attr('data-target');
-            var queryField = $(this).attr('data-query');
-            var resultField = $(this).attr('data-result');
-            $(this).submit( function(){
-                var url = target + $(queryField).val();
-                $(resultField).load(url);
-                return false;
-            });
-        });
-    };
-
-    processQueryForms();
-
-    // Set up ajax loading tabs
-    $('.action-tab').bind('show', function(e) {
-        var pattern=/#.+/gi
-        var contentID = e.target.toString().match(pattern)[0];
-        var action = $(contentID).attr('data-action');
-        var uri = $(contentID).attr('data-uri');
-        if (action) {
-          //var url = '$uiroot/' + action +'?uri=$lib.pathEncode($uri)&requestor=$requestor';
-          var url = '/ui/' + action + '?uri=' + uri;
-          var args = $(contentID).attr('data-args');
-          if (args) {
-             url = url + "&" + args;
-          }
-          $(contentID).load(url, function(){
-             $('.action-tab').tab(); //reinitialize tabs
-             $('.datatable').dataTable();
-             processQueryForms();
-           });
-        };
-     });
-
-
-    // Anything marked as popinfo will have a popover (data-trigger, data-placement, data-content)
-    // enable popups
-    $(".popinfo").popover();
-
-    // General ajax forms which reload the page when actioned. Errors are displayed in elts of class "ajax-error".
-    $(".ajax-form").each(function(){
-        var form = $(this);
-        var returnURL = form.attr('data-return');
-        form. ajaxForm({
-            success:
-                function(data, status, xhr){
-                    if (returnURL) {
-                        window.location.href = returnURL;
-                    } else {
-                      location.reload();
-                    }
-                },
-
-            error:
-              function(xhr, status, error){
-                 $(".ajax-error").html("<div class='alert'> <button type='button' class='close' data-dismiss='alert'>&times;</button>Action failed: " + error + " - " + xhr.responseText + "</div>");
-              }
-          });
+    // Auto-submit for select controls
+    $("select.auto-submit").change(function() {
+        $(this).closest("form").submit();
     });
+
+    // Data table auto-config
+    $(".data-table").dataTable();
+
+    // Generic ajax actions
+    $(".ajax-run").each(function() {
+        var elt = $(this);
+        var target = elt.attr('data-target');
+        var action = elt.attr('data-action');
+        elt.click(function(){
+            $(target).load(action);
+        });
+    });
+
+    // ------------
+    // Edit support
+    // ------------
 
     // Set up editable fields
     $.fn.editable.defaults.mode = 'inline';
 
+    var editTarget = function(event) {
+        return $(event.target).closest("button").attr("data-target");
+    }
+
     var editRemoveAction = function(e){
-        var rowid = $(e.target).attr("data-target");
+        var rowid = editTarget(e);
         $(rowid).remove();
     };
 
@@ -80,8 +43,8 @@ $(function() {
     var makeEditRow = function(id, prop, value) {
         var row =
             '<tr id="$id">' + makeEditCell("prop", prop) + makeEditCell(prop, value)
-            + '<td><a class="edit-remove-row"><i data-target="#$id"  class="icon-minus-sign"></i></a>   \n'
-            +     '<a class="edit-add-row"><i data-target="#$id"  class="icon-plus-sign"></i></a></td></tr>';
+            + '<td><button class="edit-remove-row  btn btn-sm" data-target="#$id"><span class="glyphicon glyphicon-minus-sign"></span></button>   \n'
+            +     '<button class="edit-add-row btn btn-sm" data-target="#$id"><span class="glyphicon glyphicon-plus-sign"></span></button></td></tr>';
         row = row.replace(/\$id/g, id);
         return row;
     };
@@ -104,7 +67,7 @@ $(function() {
     var idcount = 1;
 
     var editAddAction = function(e){
-        var row = $($(e.target).attr("data-target"));
+        var row = $( editTarget(e) );
         var newid = row.attr("id") + idcount++;
         var prop = row.find("td:first").text();
         installEditRow(row, newid, prop, '""');
@@ -112,7 +75,7 @@ $(function() {
     }
 
     var editAddNewAction = function(e) {
-        var tableid = $(e.target).attr("data-target");
+        var tableid = editTarget(e);
         var lastrow = $(tableid).find("tbody tr:last");
         var newid =  (tableid.replace(/^#/,'')) + "-newrow-"+ idcount++;
         installEditRow(lastrow, newid, '', '');
@@ -158,7 +121,6 @@ $(function() {
             var value = emit( $(row[1]).text() );
             data = data + "    " + prop + " " + value + " ;\n";
         });
-        alert(data);
         $.ajax({
             type: (isItem ? "PATCH" : "PUT"),
             url: url,
@@ -166,11 +128,12 @@ $(function() {
             contentType: "text/turtle",
             success: function(){
                 $("#msg").html("Submitted successfully");
+                $('#msg-alert').removeClass('alert-warning').addClass('alert-success').show();
                 window.location.href = returnURL;
             },
             error: function(xhr, status, error){
                 $("#msg").html("Save failed: " + error + " - " + xhr.responseText);
-                $('#msg-alert').removeClass('alert-success').addClass('alert-error').show();
+                $('#msg-alert').removeClass('alert-success').addClass('alert-warning').show();
             }
           });
     });

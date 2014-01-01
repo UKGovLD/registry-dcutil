@@ -1,23 +1,80 @@
+#if($subject.isAuthenticated())
+  #set($user=$subject.principal.name)
+#else
+  ## Comment out during testing so can pass user in manually
+  ##set($user=false)
+#end
 
-  <div class="navbar navbar-fixed-top">
-    <div class="span1">
-    </div>
-    <div class="navbar-inner">
-      <ul class="nav">
-        <li #if($nav=="root")class="active"#end><a class="brand popinfo" href="/$root" data-trigger="hover" data-placement="bottom"
-            data-content="Return to the registry home page.">
-         Mini browse</a></li>
-      </ul>
-      <div class="span1"> </div>
-      <ul class="nav">
-        <li #if($nav=="classes")class="active"#end><a href="classes">classes</a></li>
-        <li #if($nav=="subjects")class="active"#end><a href="subjects">subjects</a></li>
-      </ul>
-
-      <form action="$uiroot/text-search" method="get" class="navbar-search">
-        <input type="search" class="search-query" placeholder="Search" #if($query)value="$query"#end name="query"/>
-##             <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" />
-      </form>
-
-    </div>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+##    <a class="navbar-brand" href="$root/">Environment Registry Data Prep</a>
+    <a class="navbar-brand" href="$root/?user=Dave">Environment Registry Data Prep</a>
   </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="#new-project-dialog" data-target="#new-project-dialog" role="button" data-toggle="modal">New Project</a></li>
+    </ul>
+
+    <ul class="nav pull-right">
+      <li>
+        #if($user)
+        <span>
+          <span class="nav-text">$user</span><span class="glyphicon glyphicon-user"></span>
+          <a class="popinfo" data-trigger="hover" data-placement="left"   data-content="Logout"
+                      href="#logout-dialog" data-target="#logout-dialog" role="button" data-toggle="modal"><span class="glyphicon glyphicon-remove-circle"></span></a>
+        </span>
+        #else
+          <a href="$uiroot/login?return=/$uri">Login</a>
+        #end
+      </li>
+    </ul>
+
+  </div><!-- /.navbar-collapse -->
+</nav>
+
+#if($user)
+    <div id="logout-dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Do you want to logout?</h3>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="$root/system/security/logout" method="post">
+              <input type="submit" value="Logout" class="btn btn-danger" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+#end
+
+    <div id="new-project-dialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Create new project?</h3>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" action="$root/system/new-project" method="post">
+              <input type="hidden" name="user" value="$user" />
+              <div class="form-group">
+                <label for="shortname">Shortname</label>
+                <input type="text" class="form-control" id="shortname" name="shortname" placeholder="codelist">
+              </div>
+              <input type="submit" value="Create" class="btn" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>

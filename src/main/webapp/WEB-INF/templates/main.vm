@@ -1,0 +1,23 @@
+#parse("header.vm")
+#parse("navbar.vm")
+<div class="container">
+  #if($user)
+    <h2>Your current projects</h2>
+    <table class="table">
+    #foreach($project in $projectManager.listUserProjects($user))
+      <tr>
+        <td>
+            <a href="$uiroot/show-project?project=$project.root">$project.shortname</a>
+        </td>
+      </tr>
+    #end
+    </table>
+  #else
+    <h2>Welcome to the Data Preparation service</h2>
+    <p>Login or register to access your user area then use
+        <em>New Project</em> to start a new data conversion project.</p>
+    <p>
+        Once you have a project you can upload the data to be converted along 
+        with any requried metadata.</p>
+  #end
+#parse("footer.vm")
