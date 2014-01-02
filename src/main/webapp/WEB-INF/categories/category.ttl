@@ -1,0 +1,207 @@
+@prefix ssd:     <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dgu:     <http://reference.data.gov.uk/def/reference/> .
+@prefix odrs:    <http://schema.theodi.org/odrs#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix vs:      <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix org:     <http://www.w3.org/ns/org#> .
+@prefix version:  <http://purl.org/linked-data/version#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix api:     <http://purl.org/linked-data/api/vocab#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix ui:      <http://purl.org/linked-data/registry-ui#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix reg:     <http://purl.org/linked-data/registry#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix cc:      <http://creativecommons.org/ns#> .
+@prefix ldp:     <http://www.w3.org/ns/ldp#> .
+
+<http://environment.data.gov.uk/registry/structure/category/Marine_and_Coast>
+      a       skos:Concept ;
+      rdfs:label "Marine and Coast" ;
+      dct:description "Code lists related to the policy area: Marine and Coast" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Marine_and_Coast" ;
+      skos:prefLabel "Marine and Coast" .
+
+<http://environment.data.gov.uk/registry/structure/category/Air>
+      a       skos:Concept ;
+      rdfs:label "Air" ;
+      dct:description "Code lists related to the policy area: Air" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Air" ;
+      skos:prefLabel "Air" .
+
+<http://environment.data.gov.uk/registry/structure/category/International_issues>
+      a       skos:Concept ;
+      rdfs:label "International issues" ;
+      dct:description "Code lists related to the policy area: International issues" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "International_issues" ;
+      skos:prefLabel "International issues" .
+
+<http://environment.data.gov.uk/registry/structure/category/Land_Use>
+      a       skos:Concept ;
+      rdfs:label "Land Use" ;
+      dct:description "Code lists related to the policy area: Land Use" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Land_Use" ;
+      skos:prefLabel "Land Use" .
+
+<http://environment.data.gov.uk/registry/structure/category/Nature_and_Biodiversity>
+      a       skos:Concept ;
+      rdfs:label "Nature and Biodiversity" ;
+      dct:description "Code lists related to the policy area: Nature and Biodiversity" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Nature_and_Biodiversity" ;
+      skos:prefLabel "Nature and Biodiversity" .
+
+<http://environment.data.gov.uk/registry/structure/category>
+      a       reg:Register , ldp:Container , skos:ConceptScheme ;
+      rdfs:label "Category"@en ;
+      <http://environment.data.gov.uk/registry/structure/ui/entityType>
+              <http://environment.data.gov.uk/registry/structure/entity-type/Abstract> ;
+      dct:description "Codes used to classify collections in the registry, based on Natura2000 policy areas."@en ;
+      dct:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/> ;
+      dct:modified "2013-12-17T16:38:02.306Z"^^xsd:dateTime ;
+      dct:publisher <http://environment.data.gov.uk/registry/structure/org/department-for-environment-food-rural-affairs> ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      reg:category <http://environment.data.gov.uk/registry/structure/category/System> ;
+      reg:inverseMembershipPredicate
+              skos:inScheme ;
+      reg:owner <http://environment.data.gov.uk/registry/structure/org/department-for-environment-food-rural-affairs> ;
+      owl:versionInfo 2 .
+
+<http://environment.data.gov.uk/registry/structure/category/Sustainable_development>
+      a       skos:Concept ;
+      rdfs:label "Sustainable development" ;
+      dct:description "Code lists related to the policy area: Sustainable development" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Sustainable_development" ;
+      skos:prefLabel "Sustainable development" .
+
+<http://environment.data.gov.uk/registry/structure/category/Industry>
+      a       skos:Concept ;
+      rdfs:label "Industry" ;
+      dct:description "Code lists related to the policy area: Industry" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Industry" ;
+      skos:prefLabel "Industry" .
+
+<http://environment.data.gov.uk/registry/structure/category/Waste>
+      a       skos:Concept ;
+      rdfs:label "Waste" ;
+      dct:description "Code lists related to the policy area: Waste" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Waste" ;
+      skos:prefLabel "Waste" .
+
+<http://environment.data.gov.uk/registry/structure/category/Chemicals>
+      a       skos:Concept ;
+      rdfs:label "Chemicals" ;
+      dct:description "Code lists related to the policy area: Chemicals" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Chemicals" ;
+      skos:prefLabel "Chemicals" .
+
+<http://environment.data.gov.uk/registry/structure/category/System>
+      a       skos:Concept ;
+      rdfs:label "System" ;
+      dct:description "Codes related to internal operation of the registry itself" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "System" ;
+      skos:prefLabel "System" .
+
+<http://environment.data.gov.uk/registry/structure/category/Resource_efficiency>
+      a       skos:Concept ;
+      rdfs:label "Resource efficiency" ;
+      dct:description "Code lists related to the policy area: Resource efficiency" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Resource_efficiency" ;
+      skos:prefLabel "Resource efficiency" .
+
+<http://environment.data.gov.uk/registry/structure/category/Water>
+      a       skos:Concept ;
+      rdfs:label "Water" ;
+      dct:description "Code lists related to the policy area: Water" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Water" ;
+      skos:prefLabel "Water" .
+
+<http://environment.data.gov.uk/registry/structure/category/Noise>
+      a       skos:Concept ;
+      rdfs:label "Noise" ;
+      dct:description "Code lists related to the policy area: Noise" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Noise" ;
+      skos:prefLabel "Noise" .
+
+<http://environment.data.gov.uk/registry/structure/category/Soil>
+      a       skos:Concept ;
+      rdfs:label "Soil" ;
+      dct:description "Code lists related to the policy area: Soil" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/category> ;
+      skos:notation "Soil" ;
+      skos:prefLabel "Soil" .

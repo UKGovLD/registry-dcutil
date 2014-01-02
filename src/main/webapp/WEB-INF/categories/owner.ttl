@@ -1,0 +1,550 @@
+@prefix ssd:     <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dgu:     <http://reference.data.gov.uk/def/reference/> .
+@prefix odrs:    <http://schema.theodi.org/odrs#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix vs:      <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix org:     <http://www.w3.org/ns/org#> .
+@prefix version:  <http://purl.org/linked-data/version#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix api:     <http://purl.org/linked-data/api/vocab#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix ui:      <http://purl.org/linked-data/registry-ui#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix reg:     <http://purl.org/linked-data/registry#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix cc:      <http://creativecommons.org/ns#> .
+@prefix ldp:     <http://www.w3.org/ns/ldp#> .
+
+<http://environment.data.gov.uk/registry/structure/org/science-advisory-council>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/AdvisoryNDPB> ;
+      rdfs:label "Science Advisory Council" ;
+      skos:notation "science-advisory-council" ;
+      skos:prefLabel "Science Advisory Council" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/science-advisory-council> .
+
+<http://environment.data.gov.uk/registry/structure/org/north-york-moors-national-park>
+      a       org:Organization ;
+      rdfs:label "North York Moors National Park Authority" ;
+      skos:notation "north-york-moors-national-park" ;
+      skos:prefLabel "North York Moors National Park Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/north-york-moors-national-park> .
+
+<http://environment.data.gov.uk/registry/structure/org/the-food-and-environment-research-agency>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/ExecutiveAgency> ;
+      rdfs:label "Food & Environment Research Agency" ;
+      owl:sameAs <http://reference.data.gov.uk/id/public-body/food--environment-research-agency> ;
+      skos:notation "the-food-and-environment-research-agency" ;
+      skos:prefLabel "Food & Environment Research Agency" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/the-food-and-environment-research-agency> .
+
+<http://environment.data.gov.uk/registry/structure/org/agriculture-and-horticulture-development-board>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Agriculture and Horticulture Development Board" ;
+      skos:notation "agriculture-and-horticulture-development-board" ;
+      skos:prefLabel "Agriculture and Horticulture Development Board" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/agriculture-and-horticulture-development-board> .
+
+<http://environment.data.gov.uk/registry/structure/org/agricultural-wages-committee-x13>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Agricultural Wages Committee" ;
+      skos:notation "agricultural-wages-committee-x13" ;
+      skos:prefLabel "Agricultural Wages Committee" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/agricultural-wages-committee-x13> .
+
+<http://environment.data.gov.uk/registry/structure/org/national-forest-company>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "National Forest Company" ;
+      skos:notation "national-forest-company" ;
+      skos:prefLabel "National Forest Company" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/national-forest-company> .
+
+<http://environment.data.gov.uk/registry/structure/org/natural-england>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Natural England" ;
+      owl:sameAs <http://reference.data.gov.uk/id/public-body/natural-england> ;
+      skos:notation "natural-england" ;
+      skos:prefLabel "Natural England" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/natural-england> .
+
+<http://environment.data.gov.uk/registry/structure/org/environment-agency>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Environment Agency" ;
+      owl:sameAs <http://reference.data.gov.uk/id/public-body/environment-agency> ;
+      skos:altLabel "EA" ;
+      skos:notation "environment-agency" ;
+      skos:prefLabel "Environment Agency" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/environment-agency> .
+
+<http://environment.data.gov.uk/registry/structure/org/independent-agricultural-appeals-panel>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/AdvisoryNDPB> ;
+      rdfs:label "Independent Agricultural Appeals Panel" ;
+      skos:notation "independent-agricultural-appeals-panel" ;
+      skos:prefLabel "Independent Agricultural Appeals Panel" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/independent-agricultural-appeals-panel> .
+
+<http://environment.data.gov.uk/registry/structure/org/animal-health-and-veterinary-laboratories-agency>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/ExecutiveAgency> ;
+      rdfs:label "Animal Health Veterinary Laboratories Agency" ;
+      owl:sameAs <http://reference.data.gov.uk/id/public-body/animal-health-veterinary-laboritories-agency> ;
+      skos:notation "animal-health-and-veterinary-laboratories-agency" ;
+      skos:prefLabel "Animal Health Veterinary Laboratories Agency" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/animal-health-and-veterinary-laboratories-agency> .
+
+<http://environment.data.gov.uk/registry/structure/org/advisory-committee-on-releases-to-the-environment>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/AdvisoryNDPB> ;
+      rdfs:label "Advisory Committee on Releases to the Environment" ;
+      skos:notation "advisory-committee-on-releases-to-the-environment" ;
+      skos:prefLabel "Advisory Committee on Releases to the Environment" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/advisory-committee-on-releases-to-the-environment> .
+
+<http://environment.data.gov.uk/registry/structure/org/drinking-water-inspectorate>
+      a       org:Organization ;
+      rdfs:label "Drinking Water Inspectorate" ;
+      skos:notation "drinking-water-inspectorate" ;
+      skos:prefLabel "Drinking Water Inspectorate" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/drinking-water-inspectorate> .
+
+<http://environment.data.gov.uk/registry/structure/org/northumberland-national-park-authority>
+      a       org:Organization ;
+      rdfs:label "Northumberland National Park Authority" ;
+      skos:notation "northumberland-national-park-authority" ;
+      skos:prefLabel "Northumberland National Park Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/northumberland-national-park-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/royal-botanic-gardens-kew>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Royal Botanic Gardens Kew" ;
+      skos:notation "royal-botanic-gardens-kew" ;
+      skos:prefLabel "Royal Botanic Gardens Kew" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/board-of-trustees-of-the-royal-botanic-gardens-kew> .
+
+<http://environment.data.gov.uk/registry/structure/org/centre-for-environment-fisheries-and-aquaculture-science>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/ExecutiveAgency> ;
+      rdfs:label "Centre for Environment, Fisheries and Aquaculture Science" ;
+      owl:sameAs <http://reference.data.gov.uk/id/public-body/cefas> ;
+      skos:altLabel "CEFAS" ;
+      skos:notation "centre-for-environment-fisheries-and-aquaculture-science" ;
+      skos:prefLabel "Centre for Environment, Fisheries and Aquaculture Science" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/centre-for-environment-fisheries-and-aquaculture-science> .
+
+<http://environment.data.gov.uk/registry/structure/org/forestry-commission>
+      a       <http://reference.data.gov.uk/def/central-government/NonMinisterialDepartment> , org:Organization ;
+      rdfs:label "Forestry Commission" ;
+      skos:notation "forestry-commission" ;
+      skos:prefLabel "Forestry Commission" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/forestry-commission> .
+
+<http://environment.data.gov.uk/registry/structure/org/lake-district-national-park-authority>
+      a       org:Organization ;
+      rdfs:label "Lake District National Park Authority" ;
+      skos:notation "lake-district-national-park-authority" ;
+      skos:prefLabel "Lake District National Park Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/lake-district-national-park-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/peak-district-national-park>
+      a       org:Organization ;
+      rdfs:label "Peak District National Park Authority" ;
+      skos:notation "peak-district-national-park" ;
+      skos:prefLabel "Peak District National Park Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/peak-district-national-park> .
+
+<http://environment.data.gov.uk/registry/structure/org>
+      a       reg:Register , ldp:Container ;
+      rdfs:label "Organizations"@en ;
+      rdfs:member <http://environment.data.gov.uk/registry/structure/org/advisory-committee-on-pesticides> , <http://environment.data.gov.uk/registry/structure/org/science-advisory-council> , <http://environment.data.gov.uk/registry/structure/org/department-for-environment-food-rural-affairs> , <http://environment.data.gov.uk/registry/structure/org/north-york-moors-national-park> , <http://environment.data.gov.uk/registry/structure/org/the-food-and-environment-research-agency> , <http://environment.data.gov.uk/registry/structure/org/yorkshire-dales-national-park-authority> , <http://environment.data.gov.uk/registry/structure/org/exmoor-national-park-authority> , <http://environment.data.gov.uk/registry/structure/org/the-water-services-regulation-authority> , <http://environment.data.gov.uk/registry/structure/org/agriculture-and-horticulture-development-board> , <http://environment.data.gov.uk/registry/structure/org/agricultural-wages-committee-x13> , <http://environment.data.gov.uk/registry/structure/org/natural-england> , <http://environment.data.gov.uk/registry/structure/org/national-forest-company> , <http://environment.data.gov.uk/registry/structure/org/environment-agency> , <http://environment.data.gov.uk/registry/structure/org/new-forest-national-park-authority> , <http://environment.data.gov.uk/registry/structure/org/rural-payments-agency> , <http://environment.data.gov.uk/registry/structure/org/veterinary-products-committee> , <http://environment.data.gov.uk/registry/structure/org/south-downs-national-park-authority> , <http://environment.data.gov.uk/registry/structure/org/broads-authority> , <http://environment.data.gov.uk/registry/structure/org/veterinary-medicines-directorate> , <http://environment.data.gov.uk/registry/structure/org/independent-agricultural-appeals-panel> , <http://environment.data.gov.uk/registry/structure/org/agricultural-dwelling-house-advisory-committees-x16> , <http://environment.data.gov.uk/registry/structure/org/gangmasters-licensing-authority> , <http://environment.data.gov.uk/registry/structure/org/animal-health-and-veterinary-laboratories-agency> , <http://environment.data.gov.uk/registry/structure/org/advisory-committee-on-releases-to-the-environment> , <http://environment.data.gov.uk/registry/structure/org/drinking-water-inspectorate> , <http://environment.data.gov.uk/registry/structure/org/northumberland-national-park-authority> , <http://environment.data.gov.uk/registry/structure/org/royal-botanic-gardens-kew> , <http://environment.data.gov.uk/registry/structure/org/plant-varieties-and-seeds-tribunal> , <http://environment.data.gov.uk/registry/structure/org/centre-for-environment-fisheries-and-aquaculture-science> , <http://environment.data.gov.uk/registry/structure/org/forestry-commission> , <http://environment.data.gov.uk/registry/structure/org/consumer-council-for-water> , <http://environment.data.gov.uk/registry/structure/org/lake-district-national-park-authority> , <http://environment.data.gov.uk/registry/structure/org/sea-fish-industry-authority> , <http://environment.data.gov.uk/registry/structure/org/peak-district-national-park> , <http://environment.data.gov.uk/registry/structure/org/covent-garden-market-authority> , <http://environment.data.gov.uk/registry/structure/org/joint-nature-conservation-committee> , <http://environment.data.gov.uk/registry/structure/org/dartmoor-national-park-authority> , <http://environment.data.gov.uk/registry/structure/org/marine-management-organisation> ;
+      <http://environment.data.gov.uk/registry/structure/ui/entityType>
+              <http://environment.data.gov.uk/registry/structure/entity-type/Organizations_and_sectors> ;
+      dct:description "Codes used to identify each organization in the DEFRA family."@en ;
+      dct:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/> ;
+      dct:modified "2013-12-17T16:38:01.266Z"^^xsd:dateTime ;
+      dct:publisher <http://environment.data.gov.uk/registry/structure/org/department-for-environment-food-rural-affairs> ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      dct:rights
+              [ a       odrs:RightsStatement ;
+                odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0." ;
+                odrs:dataLicense <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/>
+              ] ;
+      reg:category <http://environment.data.gov.uk/registry/structure/category/System> ;
+      reg:owner <http://environment.data.gov.uk/registry/structure/org/department-for-environment-food-rural-affairs> ;
+      owl:versionInfo 2 ;
+      ldp:membershipPredicate
+              rdfs:member .
+
+<http://environment.data.gov.uk/registry/structure/org/joint-nature-conservation-committee>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Joint Nature Conservation Committee" ;
+      owl:sameAs <http://reference.data.gov.uk/id/public-body/joint-nature-conservation-committee> ;
+      skos:notation "joint-nature-conservation-committee" ;
+      skos:prefLabel "Joint Nature Conservation Committee" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/joint-nature-conservation-committee> .
+
+<http://environment.data.gov.uk/registry/structure/org/dartmoor-national-park-authority>
+      a       org:Organization ;
+      rdfs:label "Dartmoor National Park Authority" ;
+      skos:notation "dartmoor-national-park-authority" ;
+      skos:prefLabel "Dartmoor National Park Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/dartmoor-national-park-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/advisory-committee-on-pesticides>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/AdvisoryNDPB> ;
+      rdfs:label "Advisory Committee on Pesticides" ;
+      skos:notation "advisory-committee-on-pesticides" ;
+      skos:prefLabel "Advisory Committee on Pesticides" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/advisory-committee-on-pesticides> .
+
+<http://environment.data.gov.uk/registry/structure/org/department-for-environment-food-rural-affairs>
+      a       <http://reference.data.gov.uk/def/central-government/MinisterialDepartment> , org:Organization ;
+      rdfs:label "Department for Environment, Food & Rural Affairs" ;
+      owl:sameAs <http://reference.data.gov.uk/id/department/defra> ;
+      skos:altLabel "DEFRA" ;
+      skos:notation "department-for-environment-food-rural-affairs" ;
+      skos:prefLabel "Department for Environment, Food & Rural Affairs" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/department-for-environment-food-rural-affairs> .
+
+<http://environment.data.gov.uk/registry/structure/org/yorkshire-dales-national-park-authority>
+      a       org:Organization ;
+      rdfs:label "Yorkshire Dales National Park Authority" ;
+      skos:notation "yorkshire-dales-national-park-authority" ;
+      skos:prefLabel "Yorkshire Dales National Park Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/yorkshire-dales-national-park-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/exmoor-national-park-authority>
+      a       org:Organization ;
+      rdfs:label "Exmoor National Park Authority" ;
+      skos:notation "exmoor-national-park-authority" ;
+      skos:prefLabel "Exmoor National Park Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/exmoor-national-park-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/the-water-services-regulation-authority>
+      a       <http://reference.data.gov.uk/def/central-government/NonMinisterialDepartment> , org:Organization ;
+      rdfs:label "The Water Services Regulation Authority" ;
+      skos:altLabel "OFWAT" ;
+      skos:notation "the-water-services-regulation-authority" ;
+      skos:prefLabel "The Water Services Regulation Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/the-water-services-regulation-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/new-forest-national-park-authority>
+      a       org:Organization ;
+      rdfs:label "New Forest National Park Authority" ;
+      skos:notation "new-forest-national-park-authority" ;
+      skos:prefLabel "New Forest National Park Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/new-forest-national-park-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/rural-payments-agency>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/ExecutiveAgency> ;
+      rdfs:label "Rural Payments Agency" ;
+      owl:sameAs <http://reference.data.gov.uk/id/public-body/rural-payments-agency> ;
+      skos:notation "rural-payments-agency" ;
+      skos:prefLabel "Rural Payments Agency" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/rural-payments-agency> .
+
+<http://environment.data.gov.uk/registry/structure/org/south-downs-national-park-authority>
+      a       org:Organization ;
+      rdfs:label "South Downs National Park Authority" ;
+      skos:notation "south-downs-national-park-authority" ;
+      skos:prefLabel "South Downs National Park Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/south-downs-national-park-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/veterinary-products-committee>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/AdvisoryNDPB> ;
+      rdfs:label "Veterinary Products Committee" ;
+      skos:notation "veterinary-products-committee" ;
+      skos:prefLabel "Veterinary Products Committee" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/veterinary-products-committee> .
+
+<http://environment.data.gov.uk/registry/structure/org/broads-authority>
+      a       org:Organization ;
+      rdfs:label "Broads Authority" ;
+      skos:notation "broads-authority" ;
+      skos:prefLabel "Broads Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/broads-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/veterinary-medicines-directorate>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/ExecutiveAgency> ;
+      rdfs:label "Veterinary Medicines Directorate" ;
+      owl:sameAs <http://reference.data.gov.uk/id/public-body/veterinary-medicines-directorate> ;
+      skos:altLabel "VMD" ;
+      skos:notation "veterinary-medicines-directorate" ;
+      skos:prefLabel "Veterinary Medicines Directorate" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/veterinary-medicines-directorate> .
+
+<http://environment.data.gov.uk/registry/structure/org/agricultural-dwelling-house-advisory-committees-x16>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/AdvisoryNDPB> ;
+      rdfs:label "Agricultural Dwelling House Advisory Committees (x16)" ;
+      skos:notation "agricultural-dwelling-house-advisory-committees-x16" ;
+      skos:prefLabel "Agricultural Dwelling House Advisory Committees (x16)" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/agricultural-dwelling-house-advisory-committees-x16> .
+
+<http://environment.data.gov.uk/registry/structure/org/gangmasters-licensing-authority>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Gangmasters Licensing Authority" ;
+      skos:notation "gangmasters-licensing-authority" ;
+      skos:prefLabel "Gangmasters Licensing Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/gangmasters-licensing-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/plant-varieties-and-seeds-tribunal>
+      a       org:Organization , <http://reference.data.gov.uk/def/central-government/TribunalNDPB> ;
+      rdfs:label "Plant Varieties and Seeds Tribunal" ;
+      skos:notation "plant-varieties-and-seeds-tribunal" ;
+      skos:prefLabel "Plant Varieties and Seeds Tribunal" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/plant-varieties-and-seeds-tribunal> .
+
+<http://environment.data.gov.uk/registry/structure/org/consumer-council-for-water>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Consumer Council for Water" ;
+      skos:notation "consumer-council-for-water" ;
+      skos:prefLabel "Consumer Council for Water" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/consumer-council-for-water> .
+
+<http://environment.data.gov.uk/registry/structure/org/sea-fish-industry-authority>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Sea Fish Industry Authority" ;
+      skos:notation "sea-fish-industry-authority" ;
+      skos:prefLabel "Sea Fish Industry Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/sea-fish-industry-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/covent-garden-market-authority>
+      a       org:Organization ;
+      rdfs:label "Covent Garden Market Authority" ;
+      skos:notation "covent-garden-market-authority" ;
+      skos:prefLabel "Covent Garden Market Authority" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/covent-garden-market-authority> .
+
+<http://environment.data.gov.uk/registry/structure/org/marine-management-organisation>
+      a       <http://reference.data.gov.uk/def/central-government/ExecutiveNDPB> , org:Organization ;
+      rdfs:label "Marine Management Organisation" ;
+      owl:sameAs <http://reference.data.gov.uk/id/public-body/marine-management-organisation> ;
+      skos:altLabel "MMO" ;
+      skos:notation "marine-management-organisation" ;
+      skos:prefLabel "Marine Management Organisation" ;
+      foaf:homepage <https://www.gov.uk/government/organisations/marine-management-organisation> .

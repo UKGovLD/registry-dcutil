@@ -1,4 +1,5 @@
 #set($p=$projectManager.getProject($project))
+#set($metadata = $p.metadata)
 #set($pageTitle="Project $p.shortname")
 #parse("header.vm")
 #parse("navbar.vm")
@@ -7,18 +8,36 @@
   <div class="row">
     <div class="col-md-2"> <h4>Label:</h4> </div>
     <div class="col-md-10
-    9"> TBD </div>
+    9">$metadata.label</div>
   </div>
   <div class="row">
     <div class="col-md-2"> <h4>Description:</h4> </div>
-    <div class="col-md-10"> TBD </div>
+    <div class="col-md-10">$metadata.description</div>
   </div>
+
+  #if($p.templateName && $p.sourceFile && $metadata.category)
+    <p>Project is ready to run conversion</p>
+  #else
+    <p>Prepare project:
+      <ul>
+        #if(!$p.sourceFile)
+          <li>load source file</li>
+        #end
+        #if(!$p.templateName)
+          <li>choose or upload a conversion template</li>
+        #end
+        #if(!$metadata.category)
+          <li>update the metadata for the code list</li>
+        #end
+      </ul>
+    </p>
+  #end
 
   <ul class="nav nav-tabs">
     <li #if(!$tab)class="active"#end><a href="#data" data-toggle="tab">Data #if($p.sourceFile)<span class="glyphicon glyphicon-ok"></span>#end</a></li>
     <li #if($tab == "template")class="active"#end><a href="#template" data-toggle="tab">Template #if($p.templateName)<span class="glyphicon glyphicon-ok"></span>#end</a></li>
-    <li><a href="#metadata" data-toggle="tab">Metadata</a></li>
-    #if($p.templateName && $p.sourceFile)
+    <li #if($tab == "metadata")class="active"#end><a href="#metadata" data-toggle="tab">Metadata #if($metadata.category)<span class="glyphicon glyphicon-ok"></span>#end</a></li>
+    #if($p.templateName && $p.sourceFile && $metadata.category)
     <li><a href="#conversion" data-toggle="tab">Conversion</a></li>
     #end
   </ul>
@@ -26,74 +45,11 @@
   <!-- Tab panes -->
   <div class="tab-content">
 
-    <div class="tab-pane #if(!$tab)active#end" id="data">
-      <p>
-        #if(! $p.sourceFile)
-        Please upload the source data file.
-        #else
-        Current source file is: <strong>$p.sourceFile</strong>
-        #end
-      </p>
-      <form class = "form-inline" role="form" action="$root/system/upload-data" enctype="multipart/form-data" method="post">
-        <div class="form-group">
-          ## <label for="dataSubmit">Data file</label>
-          <input class="form-control" type="file" id="dataSubmit" name="file">
-        </div>
-        <input type="hidden" name="project" value="$p.root" />
-        <button type="submit" class="btn btn-default">#if(!$p.sourceFile)upload #else reload#end</button>
-      </form>
+    #parse("tab-datasource.vm")
 
-      #if($p.sourceFile)
-        <h3>Data preview</h3>
-        #set($preview = $p.preview(500))
-##        <table class="table table-striped table-condensed table-bordered">
-        <table class="data-table">
-          <thead>
-            <tr>
-              #foreach($header in $preview.headers)
-                <th>$header</th>
-              #end
-            </tr>
-          </thead>
-          <tbody>
-            #foreach($row in $preview.rows)
-              <tr>
-                #foreach($header in $preview.headers)
-                  <td>$row.get($header)</td>
-                #end
-              </tr>
-            #end
-          </tbody>
-        </table>
-      #end
-    </div>
+    #parse("tab-template.vm")
 
-    <div class="tab-pane #if($tab == 'template')active#end" id="template">
-      #if($p.templateName)
-        #set($template = $p.dataContext.getTemplate($p.templateName))
-        <p><strong>Template:</strong> $template.name</p>
-        <p>$template.description</p>
-      #end
-      <form class="form-inline" role="form" action="$root/system/select-template" method="post">
-        <div class="form-group">
-          <label for="select1">Choose a conversion template</label>
-          <select class="form-control auto-submit" id="select1" name="template">
-            #foreach($template in $p.dataContext.listTemplates())
-            <option #if($p.templateName && $p.templateName == $template.name)selected#end>$template.name</option>
-            #end
-          </select>
-        </div>
-        <input type="hidden" name="project" value="$p.root" />
-        <input type="hidden" name="tab" value="template" />
-        ## <button type="submit" class="btn btn-default">select</button>
-      </form>
-      #if($p.templateName)
-        <h3>Template source</h3>
-        <pre>$lib.escapeHtml($template.source)</pre>
-      #end
-    </div>
-
-    <div class="tab-pane" id="metadata">...</div>
+    #parse("tab-metadata.vm")
 
     <div class="tab-pane" id="conversion">
       <button type="button" class="btn btn-default ajax-run" data-target="#progressPanel" data-action="$uiroot/run-conversion?project=$p.root">Run conversion</button>

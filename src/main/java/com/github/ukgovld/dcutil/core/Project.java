@@ -13,14 +13,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import com.epimorphics.appbase.core.AppConfig;
 import com.epimorphics.dclib.framework.ConverterProcess;
 import com.epimorphics.dclib.framework.DataContext;
 import com.epimorphics.dclib.framework.Template;
 import com.epimorphics.dclib.templates.TemplateFactory;
+import com.epimorphics.rdfutil.RDFUtil;
 import com.epimorphics.tasks.ProgressMonitor;
 import com.epimorphics.tasks.SimpleProgressMonitor;
 import com.epimorphics.util.NameUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.util.FileUtils;
+import com.hp.hpl.jena.vocabulary.DCTerms;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 /**
  * Represents an individual data conversion project including source data,
@@ -31,6 +39,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class Project {
     public static final String OUTPUT_FILE = "output.ttl";
+    public static final String DEFAULT_METADATA_FILE = "metadata.ttl";
     
     protected String root;          // Base folder within the filestore for this project
     protected String templateName;
@@ -38,9 +47,10 @@ public class Project {
     protected String shortname;     // Notation to use for the generated collection 
     protected String metadataFile;  // May be uploaded and/or edited
     protected String localTemplateFile;
-    
-    @JsonIgnore
-    protected ProjectManager pm;
+
+    @JsonIgnore    protected DataContext dc;
+    @JsonIgnore    protected ProjectManager pm;
+    @JsonIgnore    protected MetadataModel metadata;
     
     protected void setProjectManager(ProjectManager pm) {
         this.pm = pm;
@@ -81,6 +91,7 @@ public class Project {
     
     public void setMetadataFile(String metadataFile) {
         this.metadataFile = metadataFile;
+        metadata = null;
     }
 
     public String getLocalTemplateFile() {
@@ -89,6 +100,7 @@ public class Project {
 
     public void setLocalTemplateFile(String localTemplateFile) {
         this.localTemplateFile = localTemplateFile;
+        dc = null;
     }
 
     public String fullFileName(String file) {
@@ -97,35 +109,65 @@ public class Project {
     
     @JsonIgnore
     public DataContext getDataContext() throws IOException {
-        DataContext dc = pm.getDataContext();
-        if (localTemplateFile != null) {
-            InputStream is = readFile(localTemplateFile);
-            Template template = TemplateFactory.templateFrom(is, dc);
-            is.close();
-            
-            dc = new DataContext(dc);
-            dc.registerTemplate(template);
+        if (dc == null) {
+            dc = new DataContext( pm.getDataContext() );
+            if (localTemplateFile != null) {
+                InputStream is = readFile(localTemplateFile);
+                Template template = TemplateFactory.templateFrom(is, dc);
+                is.close();
+                dc.registerTemplate(template);
+            }
+            dc.setPrefixes( getMetadata().getModel() );
         }
         return dc;
     }
     
+    @JsonIgnore
+    public MetadataModel getMetadata() throws IOException {
+        if (metadata == null) {
+            Model model = ModelFactory.createDefaultModel();
+            if (metadataFile != null) {
+                String lang = FileUtils.guessLang(metadataFile, FileUtils.langTurtle);
+                InputStream in = pm.getStore().read( fullFileName(metadataFile) );
+                String DUMMY = "http://example.com/DONOTUSE/";
+                model.read(in, DUMMY, lang);
+                model = RDFUtil.mapNamespace(model, DUMMY, "");
+            } else {
+                model.setNsPrefixes( AppConfig.getApp().getPrefixes() );
+                Resource root = model.createResource(shortname)
+                        .addProperty(RDFS.label, shortname, "en")
+                        .addProperty(DCTerms.description, "Description ...", "en")
+                        .addProperty(DCTerms.license, model.createResource("http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/"));
+                Resource rights = model.createResource().addProperty(MetadataModel.attributionText, "Contains public sector information licensed under the Open Government Licence v2.0.");
+                root.addProperty(DCTerms.rights, rights);
+            }
+            metadata = new MetadataModel(model);
+        }
+        return metadata;
+    }
     
     /**
      * Perform the data conversion for a project. Does this synchronously
      */
     public ProgressMonitor convert() throws IOException {
         DataContext dc = getDataContext();
+        dc.getGlobalEnv().put("$base", shortname);
         Template template = dc.getTemplate( templateName );
         InputStream is = readFile(sourceFile);
         ConverterProcess process = new ConverterProcess(dc, is);
 //        process.setDebug(debug);
         process.setTemplate( template );
         SimpleProgressMonitor reporter = new SimpleProgressMonitor();
+        Model outputModel = ModelFactory.createDefaultModel();
+        Model metamodel = getMetadata().getModel();
+        outputModel.setNsPrefixes( metamodel );
+        outputModel.add( metamodel );
         process.setMessageReporter( reporter );
+        process.setModel(outputModel);
         boolean ok = process.process();
         if (ok) {
             OutputStream out = pm.getStore().write( fullFileName(OUTPUT_FILE) );
-            process.getModel().write(out, "Turtle");
+            outputModel.write(out, "Turtle");
             out.close();
         }
         return reporter;
@@ -134,10 +176,31 @@ public class Project {
     /**
      * Save the project state
      */
-    public void sync() throws IOException {
+    public synchronized void sync() throws IOException {
         OutputStream out = pm.getStore().write(getRoot() + "/" + ProjectManager.PROJECT_FILENAME);
         pm.getMapper().writeValue(out, this);
         out.close();
+    }
+    
+    /**
+     * Save an updated metadata state, which might involve saving the project as well
+     */
+    public synchronized void syncMetadata() throws IOException {
+        boolean changed = false;
+        if ( ! shortname.equals(metadata.getShortname()) ) {
+            shortname = metadata.getShortname();
+            changed = true;
+        }
+        if (metadataFile != DEFAULT_METADATA_FILE) {
+            metadataFile = DEFAULT_METADATA_FILE;
+            changed = true;
+        } 
+        if (changed) {
+            sync();
+        }
+        OutputStream os = pm.getStore().write(getRoot() + "/" + metadataFile);
+        metadata.getModel().write(os, FileUtils.langTurtle);
+        os.close();
     }
     
     /**

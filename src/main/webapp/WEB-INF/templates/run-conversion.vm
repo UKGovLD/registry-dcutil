@@ -1,0 +1,10 @@
+#set($p=$projectManager.getProject($project))
+#set($report=$p.convert())
+#foreach($message in $report.messages)
+  <p>$message</p>
+#end
+#if($report.succeeded())
+  <div class="alert alert-success">Conversion succeeded</div>
+#else
+  <div class="alert alert-danger">Conversion failed</div>
+#end

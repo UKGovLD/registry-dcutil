@@ -1,0 +1,43 @@
+## Support for the data source tab
+
+    <div class="tab-pane #if(!$tab)active#end" id="data">
+      <p>
+        #if(! $p.sourceFile)
+        Please upload the source data file.
+        #else
+        Current source file is: <strong>$p.sourceFile</strong>
+        #end
+      </p>
+      <form class = "form-inline" role="form" action="$root/system/upload-data" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+          ## <label for="dataSubmit">Data file</label>
+          <input class="form-control" type="file" id="dataSubmit" name="file">
+        </div>
+        <input type="hidden" name="project" value="$p.root" />
+        <button type="submit" class="btn btn-default">#if(!$p.sourceFile)upload #else reload#end</button>
+      </form>
+
+      #if($p.sourceFile)
+        <h3>Data preview</h3>
+        #set($preview = $p.preview(500))
+##        <table class="table table-striped table-condensed table-bordered">
+        <table class="data-table">
+          <thead>
+            <tr>
+              #foreach($header in $preview.headers)
+                <th>$header</th>
+              #end
+            </tr>
+          </thead>
+          <tbody>
+            #foreach($row in $preview.rows)
+              <tr>
+                #foreach($header in $preview.headers)
+                  <td>$row.get($header)</td>
+                #end
+              </tr>
+            #end
+          </tbody>
+        </table>
+      #end
+    </div>

@@ -1,0 +1,123 @@
+@prefix ssd:     <http://www.w3.org/ns/sparql-service-description#> .
+@prefix dgu:     <http://reference.data.gov.uk/def/reference/> .
+@prefix odrs:    <http://schema.theodi.org/odrs#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix vs:      <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix org:     <http://www.w3.org/ns/org#> .
+@prefix version:  <http://purl.org/linked-data/version#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix api:     <http://purl.org/linked-data/api/vocab#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix ui:      <http://purl.org/linked-data/registry-ui#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix reg:     <http://purl.org/linked-data/registry#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix cc:      <http://creativecommons.org/ns#> .
+@prefix ldp:     <http://www.w3.org/ns/ldp#> .
+
+<http://environment.data.gov.uk/registry/structure/entity-type/Species>
+      a       skos:Concept ;
+      rdfs:label "Species" ;
+      dct:description "Code lists used to describe species" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/entity-type> ;
+      skos:notation "Species" ;
+      skos:prefLabel "Species" .
+
+<http://environment.data.gov.uk/registry/structure/entity-type/Regions_and_Habitats>
+      a       skos:Concept ;
+      rdfs:label "Regions and Habitats" ;
+      dct:description "Code lists used to describe regions, habitats or geographic areas" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/entity-type> ;
+      skos:notation "Regions_and_Habitats" ;
+      skos:prefLabel "Regions and Habitats" .
+
+<http://environment.data.gov.uk/registry/structure/entity-type/Chemicals>
+      a       skos:Concept ;
+      rdfs:label "Chemicals" ;
+      dct:description "Code lists used to describe chemicals or other environmental pressures" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/entity-type> ;
+      skos:notation "Chemicals" ;
+      skos:prefLabel "Chemicals" .
+
+<http://environment.data.gov.uk/registry/structure/entity-type>
+      a       reg:Register , ldp:Container , skos:ConceptScheme ;
+      rdfs:label "Entity type"@en ;
+      <http://environment.data.gov.uk/registry/structure/ui/entityType>
+              <http://environment.data.gov.uk/registry/structure/entity-type/Abstract> ;
+      dct:description "Codes used to describe the type of entity that a code list is used for."@en ;
+      dct:license <http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/> ;
+      dct:modified "2013-12-17T16:38:02.835Z"^^xsd:dateTime ;
+      dct:publisher <http://environment.data.gov.uk/registry/structure/org/department-for-environment-food-rural-affairs> ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      dct:rights
+              [ odrs:attributionText
+                        "Contains public sector information licensed under the Open Government Licence v2.0."
+              ] ;
+      reg:category <http://environment.data.gov.uk/registry/structure/category/System> ;
+      reg:inverseMembershipPredicate
+              skos:inScheme ;
+      reg:owner <http://environment.data.gov.uk/registry/structure/org/department-for-environment-food-rural-affairs> ;
+      owl:versionInfo 2 .
+
+<http://environment.data.gov.uk/registry/structure/entity-type/Organizations_and_sectors>
+      a       skos:Concept ;
+      rdfs:label "Organizations and sectors" ;
+      dct:description "Code lists used to describe organizations, teams and organizational structures" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/entity-type> ;
+      skos:notation "Organizations_and_sectors" ;
+      skos:prefLabel "Organizations and sectors" .
+
+<http://environment.data.gov.uk/registry/structure/entity-type/Abstract>
+      a       skos:Concept ;
+      rdfs:label "Abstract" ;
+      dct:description "Code lists used for abstract things including for internal registry operation" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/entity-type> ;
+      skos:notation "Abstract" ;
+      skos:prefLabel "Abstract" .
+
+<http://environment.data.gov.uk/registry/structure/entity-type/Processes_and_outcomes>
+      a       skos:Concept ;
+      rdfs:label "Processes and outcomes" ;
+      dct:description "Code lists used to describe processes, investigations and outcomes" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/entity-type> ;
+      skos:notation "Processes_and_outcomes" ;
+      skos:prefLabel "Processes and outcomes" .
+
+<http://environment.data.gov.uk/registry/structure/entity-type/Points_and_objects>
+      a       skos:Concept ;
+      rdfs:label "Points and objects" ;
+      dct:description "Code lists used to describe points, spatial objects of physical objects such as assets" ;
+      skos:inScheme <http://environment.data.gov.uk/registry/structure/entity-type> ;
+      skos:notation "Points_and_objects" ;
+      skos:prefLabel "Points and objects" .

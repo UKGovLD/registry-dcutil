@@ -46,21 +46,25 @@ public class ProjectManager extends ComponentBase {
     protected String templateDir;
     
     public void setTemplateDir(String  templateDir) {
-        File dir = asFile(templateDir);
-        if (!dir.isDirectory() || !dir.canRead()) {
-            log.error( "Can't access DC template directory: " + templateDir );
-        } else {
-            this.templateDir = dir.getPath();
-            DataContext dc = converterService.getDataContext();
-            for (String file : dir.list()) {
-                File t = new File(dir, file);
-                try {
-                    dc.registerTemplate( t.getPath() );
-                    log.info("DC Template: " + file);
-                } catch (IOException e) {
-                    log.error( "Can't access DC template: " + t );
+        try { 
+            File dir = asFile(templateDir);
+            if (!dir.isDirectory() || !dir.canRead()) {
+                log.error( "Can't access DC template directory: " + templateDir );
+            } else {
+                this.templateDir = dir.getPath();
+                DataContext dc = converterService.getDataContext();
+                for (String file : dir.list()) {
+                    File t = new File(dir, file);
+                    try {
+                        dc.registerTemplate( t.getPath() );
+                        log.info("DC Template: " + file);
+                    } catch (IOException e) {
+                        log.error( "Can't access DC template: " + t );
+                    }
                 }
             }
+        } catch (Exception e) {
+            log.error("Failed to load templates directory", e);
         }
     }
     

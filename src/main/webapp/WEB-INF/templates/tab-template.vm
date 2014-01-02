@@ -1,0 +1,39 @@
+## Support for template selection and viewing
+
+    <div class="tab-pane #if($tab == 'template')active#end" id="template">
+      #if($p.templateName)
+        #set($template = $p.dataContext.getTemplate($p.templateName))
+        <p><strong>Template:</strong> $template.name</p>
+        <p>$template.description</p>
+      #end
+      <form class="form-inline" role="form" action="$root/system/select-template" method="post">
+        <div class="form-group">
+          <label for="select1">Choose a conversion template</label>
+          <select class="form-control auto-submit" id="select1" name="template">
+            <option value="">Choose ...</option>
+            #foreach($template in $p.dataContext.listTemplates())
+            <option #if($p.templateName && $p.templateName == $template.name)selected#end>$template.name</option>
+            #end
+          </select>
+        </div>
+        <input type="hidden" name="project" value="$p.root" />
+        <input type="hidden" name="tab" value="template" />
+        ## <button type="submit" class="btn btn-default">select</button>
+      </form>
+      #if($p.templateName)
+        <div class="panel-group space-above">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">Template source</a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+              <div class="panel-body">
+                <pre>$lib.escapeHtml($template.source)</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      #end
+    </div>

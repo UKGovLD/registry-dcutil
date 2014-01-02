@@ -38,6 +38,7 @@ import com.epimorphics.appbase.templates.VelocityRender;
 import com.epimorphics.appbase.webapi.WebApiException;
 import com.epimorphics.dclib.storage.FileStore;
 import com.epimorphics.util.FileUtil;
+import com.github.ukgovld.dcutil.core.MetadataModel;
 import com.github.ukgovld.dcutil.core.Project;
 import com.github.ukgovld.dcutil.core.ProjectManager;
 import com.sun.jersey.core.header.FormDataContentDisposition;
@@ -126,8 +127,45 @@ public class RequestProcessor {
             @FormParam("template") String templateName,
             @FormParam("tab") String tab) {
         Project project = projectManager.getProject(projectID);
-        project.setTemplateName(templateName);
+        if (templateName == null || templateName.isEmpty()) {
+            project.setTemplateName(null);
+        } else {
+            project.setTemplateName(templateName);
+        }
         sync(project);
+        return redirect(project, tab);
+    }
+    
+    @POST
+    @Path("system/update-metadata")
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+    public Response updateMetadata(@Context HttpHeaders hh, 
+            @FormParam("project")     String projectID,
+            @FormParam("shortname")   String shortname,
+            @FormParam("label")       String label,
+            @FormParam("description") String description,
+            @FormParam("owner")       String owner,
+            @FormParam("category")    String category,
+            @FormParam("entityType")  String entityType,
+            @FormParam("license")     String license,
+            @FormParam("attributionText") String attributionText,
+            @FormParam("tab") String tab) {
+        Project project = projectManager.getProject(projectID);
+        try {
+            MetadataModel mm = project.getMetadata();
+            mm.setShortname(shortname);
+            mm.setLabel(label);
+            mm.setDescription(description);
+            mm.setOwner(owner);
+            mm.setCategory(category);
+            mm.setEntityType(entityType);
+            mm.setLicense(license);
+            mm.setAttributionText(attributionText);
+            project.syncMetadata();
+        } catch (IOException e) {
+            log.error("Failed to update project metadata", e);
+            throw new WebApiException(500, "I/O error trying to update the project metadata: " + e);
+        }
         return redirect(project, tab);
     }
     
@@ -147,5 +185,6 @@ public class RequestProcessor {
         }
         return Response.seeOther(builder.build()).build();
     }
+    
     
 }

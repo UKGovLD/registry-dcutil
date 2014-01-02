@@ -82,3 +82,17 @@
     #restable($root, "table-condensed table-bordered")
   #end
 #end
+
+## Format a select box for a category list
+#macro(categorySelect $cat $catlabel $value)
+        <div class="form-group">
+            <label for="id_$cat" class="col-md-2 control-label">$catlabel</label>
+            <div class="col-md-6">
+              <select class="form-control" id="id_$cat" name="$cat">
+                #foreach($e in $categoryManager.getTable("$cat"))
+                <option value="$e.uri" #if($value && $value.equals($e.uri))selected#end>$e.label</option>
+                #end
+              </select>
+            </div>
+        </div>
+#end
