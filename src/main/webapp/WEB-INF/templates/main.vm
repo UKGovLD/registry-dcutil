@@ -7,7 +7,7 @@
     #foreach($project in $projectManager.listUserProjects($user))
       <tr>
         <td>
-            <a href="$uiroot/show-project?project=$project.root">$project.shortname</a>
+            <a href="$root/project/$project.root">$project.shortname</a>
         </td>
       </tr>
     #end

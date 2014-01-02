@@ -40,6 +40,7 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 public class Project {
     public static final String OUTPUT_FILE = "output.ttl";
     public static final String DEFAULT_METADATA_FILE = "metadata.ttl";
+    static final String DUMMY = "http://example.com/DONOTUSE/";
     
     protected String root;          // Base folder within the filestore for this project
     protected String templateName;
@@ -47,10 +48,12 @@ public class Project {
     protected String shortname;     // Notation to use for the generated collection 
     protected String metadataFile;  // May be uploaded and/or edited
     protected String localTemplateFile;
+    protected String resultFile;
 
     @JsonIgnore    protected DataContext dc;
     @JsonIgnore    protected ProjectManager pm;
     @JsonIgnore    protected MetadataModel metadata;
+    @JsonIgnore    protected Model result;
     
     protected void setProjectManager(ProjectManager pm) {
         this.pm = pm;
@@ -107,6 +110,15 @@ public class Project {
         return root + "/" + file;
     }
     
+    
+    public String getResultFile() {
+        return resultFile;
+    }
+
+    public void setResultFile(String resultFile) {
+        this.resultFile = resultFile;
+    }
+
     @JsonIgnore
     public DataContext getDataContext() throws IOException {
         if (dc == null) {
@@ -129,7 +141,6 @@ public class Project {
             if (metadataFile != null) {
                 String lang = FileUtils.guessLang(metadataFile, FileUtils.langTurtle);
                 InputStream in = pm.getStore().read( fullFileName(metadataFile) );
-                String DUMMY = "http://example.com/DONOTUSE/";
                 model.read(in, DUMMY, lang);
                 model = RDFUtil.mapNamespace(model, DUMMY, "");
             } else {
@@ -166,11 +177,31 @@ public class Project {
         process.setModel(outputModel);
         boolean ok = process.process();
         if (ok) {
-            OutputStream out = pm.getStore().write( fullFileName(OUTPUT_FILE) );
+            if (resultFile == null) {
+                resultFile = OUTPUT_FILE;
+                sync();
+            }
+            OutputStream out = pm.getStore().write( fullFileName(resultFile) );
             outputModel.write(out, "Turtle");
             out.close();
         }
         return reporter;
+    }
+    
+    @JsonIgnore
+    public Model getResult() throws IOException {
+        if (result == null && resultFile != null) {
+            InputStream in = pm.getStore().read( fullFileName(resultFile) );
+            result = ModelFactory.createDefaultModel();
+            result.read(in, DUMMY, FileUtils.langTurtle);
+            result = RDFUtil.mapNamespace(result, DUMMY, "");
+        }
+        return result;
+    }
+    
+    @JsonIgnore
+    public ResultWrapper getWrappedResult() throws IOException {
+        return new ResultWrapper(getResult(), shortname);
     }
     
     /**

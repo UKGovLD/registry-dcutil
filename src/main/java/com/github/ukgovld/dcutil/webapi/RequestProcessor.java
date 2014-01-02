@@ -20,6 +20,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
@@ -64,6 +65,13 @@ public class RequestProcessor {
     @Produces("text/html")
     public StreamingOutput listProjects() {
         return velocity.render("main.vm", uriInfo.getPath(), context, uriInfo.getQueryParameters());
+    }
+    
+    @Path("project/{project}")
+    @GET
+    @Produces("text/html")
+    public StreamingOutput showProject(@PathParam("project") String project) {
+        return velocity.render("show-project.vm", uriInfo.getPath(), context, uriInfo.getQueryParameters(), "project", project);
     }
     
     @POST
@@ -179,7 +187,7 @@ public class RequestProcessor {
     }
     
     private Response redirect(Project project, String tab) {
-        UriBuilder builder = uriInfo.getBaseUriBuilder().path("show-project").queryParam("project", project.getRoot());
+        UriBuilder builder = uriInfo.getBaseUriBuilder().path("project/" + project.getRoot());
         if (tab != null) {
             builder.queryParam("tab", tab);
         }

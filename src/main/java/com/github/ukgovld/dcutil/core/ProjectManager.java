@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.map.LRUMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,6 +45,7 @@ public class ProjectManager extends ComponentBase {
     protected ProjectList projectList;
     protected ConverterService converterService = new ConverterService();
     protected String templateDir;
+    protected LRUMap projectCache = new LRUMap(50);
     
     public void setTemplateDir(String  templateDir) {
         try { 
@@ -91,15 +93,20 @@ public class ProjectManager extends ComponentBase {
      * Load a project definition from its folder name.
      */
     public Project getProject(String name) {
-        // TODO add caching for projects
-        try {
-            Project project = mapper.readValue(store.read(name + "/" + PROJECT_FILENAME), Project.class);
-            project.setProjectManager(this);
-            return project;
-        } catch (IOException e) {
-            log.error("Failed to reload project file: " + name, e);
-            return null;
+        Project project = (Project) projectCache.get(name);
+        if (project == null) {
+            try {
+                project = mapper.readValue(store.read(name + "/" + PROJECT_FILENAME), Project.class);
+                project.setProjectManager(this);
+                projectCache.put(name, project);
+            } catch (IOException e) {
+                log.error("Failed to reload project file: " + name, e);
+                return null;
+            }
+        } else {
+            log.debug("Cache hit for project " + name);
         }
+        return project;
     }
 
     /**

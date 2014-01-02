@@ -5,6 +5,7 @@
 #end
 #if($report.succeeded())
   <div class="alert alert-success">Conversion succeeded</div>
+  #parse("show-data.vm")
 #else
   <div class="alert alert-danger">Conversion failed</div>
 #end
