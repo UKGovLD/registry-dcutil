@@ -1,11 +1,11 @@
 ## Global macros
 
 ## Determine the href value to use in a link to the given resource, reference URIs go external
-#macro(linkhref $res)/resource?uri=$lib.pathEncode($res.uRI)#end
+#macro(linkhref $res)?tab=browse&uri=$lib.pathEncode($res.uRI)#end
 
 ## Inject a link to the given resource
 #macro(linkfor $res)
-   <a href="#linkhref($res)" title="$res.uRI">$res.label</a>
+   <a href="#linkhref($res)" title="$res.uRI">$res.name</a>
 #end
 
 ## Render a value either as a link (if a resource) or as a (trimmed) lexical form
@@ -53,7 +53,7 @@
     <tbody>
       #foreach($pv in $res.listProperties())
         <tr>
-          <td> <strong title="$pv.getProp().uRI">$pv.getProp().label</strong> </td>
+          <td> <strong title="$pv.getProp().uRI">$pv.getProp().name</strong> </td>
           <td>
             #foreach($v in $pv.getValues())
               #if($v.isList())
@@ -64,7 +64,7 @@
                 #resentry($v)
               #end
               #if( $foreach.hasNext )|#end
-              #if( $foreach.count > 8 ) ... #break #end
+              #if( $foreach.count > 50 ) ... #break #end
             #end
             <br />
           </td>

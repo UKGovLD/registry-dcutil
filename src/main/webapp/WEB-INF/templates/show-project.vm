@@ -40,6 +40,9 @@
     #if($p.templateName && $p.sourceFile && $metadata.category)
     <li><a href="#conversion" data-toggle="tab">Conversion</a></li>
     #end
+    #if($tab == "browse")
+    <li active><a href="#browse" data-toggle="tab">Browse</a></li>
+    #end
   </ul>
 
   <!-- Tab panes -->
@@ -58,6 +61,19 @@
       #end
       <div class="space-above" id="progressPanel"></div>
     </div>
+
+    #if($tab == "browse")
+    <div class="tab-pane active" id="browse">
+      #set($result = $p.wrappedResult)
+      #set($r = $result.model.getNode($uri))
+      <h3>Browsing: $r.name</h3>
+      #if ($r.listProperties().isEmpty())
+        <p>Nothing known locally, try external link: <a href="$uri">$uri</a></p>
+      #else
+        #restable($r, "table-striped table-bordered table-condensed")
+      #end
+    </div>
+    #end
 
   </div>
 
