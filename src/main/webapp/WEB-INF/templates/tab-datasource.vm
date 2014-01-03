@@ -18,26 +18,38 @@
       </form>
 
       #if($p.sourceFile)
-        <h3>Data preview</h3>
-        #set($preview = $p.preview(500))
-##        <table class="table table-striped table-condensed table-bordered">
-        <table class="data-table">
-          <thead>
-            <tr>
-              #foreach($header in $preview.headers)
-                <th>$header</th>
-              #end
-            </tr>
-          </thead>
-          <tbody>
-            #foreach($row in $preview.rows)
-              <tr>
-                #foreach($header in $preview.headers)
-                  <td>$row.get($header)</td>
-                #end
-              </tr>
-            #end
-          </tbody>
-        </table>
+        <div class="panel-group space-above">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="#collapseData" href="#collapseData">Data preview</a>
+              </h4>
+            </div>
+            <div id="collapseData" class="panel-collapse collapse">
+              <div class="panel-body">
+                #set($preview = $p.preview(500))
+                ##        <table class="table table-striped table-condensed table-bordered">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      #foreach($header in $preview.headers)
+                      <th>$header</th>
+                      #end
+                    </tr>
+                  </thead>
+                  <tbody>
+                    #foreach($row in $preview.rows)
+                    <tr>
+                      #foreach($header in $preview.headers)
+                      <td>$row.get($header)</td>
+                      #end
+                    </tr>
+                    #end
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       #end
     </div>
