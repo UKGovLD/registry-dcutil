@@ -42,6 +42,7 @@ import com.epimorphics.util.FileUtil;
 import com.github.ukgovld.dcutil.core.MetadataModel;
 import com.github.ukgovld.dcutil.core.Project;
 import com.github.ukgovld.dcutil.core.ProjectManager;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 
@@ -53,6 +54,7 @@ import com.sun.jersey.multipart.FormDataParam;
 @Path("")
 public class RequestProcessor {
     static final Logger log = LoggerFactory.getLogger( RequestProcessor.class );
+    public static final String FULL_MIME_TURTLE = "text/turtle; charset=UTF-8";
     
     protected @Context ServletContext context;
     protected @Context UriInfo uriInfo;
@@ -74,6 +76,14 @@ public class RequestProcessor {
         return velocity.render("show-project.vm", uriInfo.getPath(), context, uriInfo.getQueryParameters(), "project", project);
     }
     
+    @Path("project/{project}/data")
+    @GET
+    @Produces(FULL_MIME_TURTLE)
+    public Model resultDownload(@PathParam("project") String projectID) throws IOException {
+        Project project = projectManager.getProject(projectID);
+        return project.getResult();
+    }
+
     @POST
     @Path("system/new-project")
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED})

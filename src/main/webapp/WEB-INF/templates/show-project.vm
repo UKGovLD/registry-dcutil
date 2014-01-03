@@ -58,6 +58,7 @@
       <button type="button" class="btn btn-default ajax-run" data-target="#progressPanel" data-action="$uiroot/run-conversion?project=$p.root">Run conversion</button>
       #if($p.resultFile)
         <button type="button" class="btn btn-default ajax-run" data-target="#progressPanel" data-action="$uiroot/show-data?project=$p.root">Show data</button>
+        <a class="btn btn-default" href="$root/project/$project/data">Download</a>
       #end
       <div class="space-above" id="progressPanel"></div>
     </div>
