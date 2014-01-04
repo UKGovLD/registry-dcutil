@@ -1,0 +1,12 @@
+#set($pageTitle="Error")
+
+#parse("header.vm")
+#parse("navbar.vm")
+
+<div class="container">
+
+  <h2>Sorry</h2>
+
+  <p>$message</p>
+
+#parse("footer.vm")

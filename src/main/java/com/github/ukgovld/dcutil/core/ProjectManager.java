@@ -134,8 +134,10 @@ public class ProjectManager extends ComponentBase {
     
     public void setStore(FileStore store) {
         this.store = store;
-        // Temp - until we have the user database running
-        projectList = new FileProjectList(store);
+    }
+    
+    public void setProjectList(ProjectList list) {
+        projectList = list;
     }
     
     public FileStore getStore() {

@@ -4,7 +4,7 @@
   #if($user)
     <h2>Your current projects</h2>
     <table class="table">
-    #foreach($project in $projectManager.listUserProjects($user))
+    #foreach($project in $projectManager.listUserProjects($subject.principal.openid))
       <tr>
         <td>
             <a href="$root/project/$project.root">$project.shortname</a>

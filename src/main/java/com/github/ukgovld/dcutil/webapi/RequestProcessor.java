@@ -31,10 +31,13 @@ import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.epimorphics.appbase.core.AppConfig;
+import com.epimorphics.appbase.security.UserInfo;
 import com.epimorphics.appbase.templates.VelocityRender;
 import com.epimorphics.appbase.webapi.WebApiException;
 import com.epimorphics.dclib.storage.FileStore;
@@ -88,11 +91,14 @@ public class RequestProcessor {
     @Path("system/new-project")
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     public Response createProject(@Context HttpHeaders hh,
-            @FormParam("user") String user,
             @FormParam("shortname") String shortname) {
-        // TODO get user from session instead of parameter? 
+        Subject subject = SecurityUtils.getSubject();
+        if (!subject.isAuthenticated()) {
+            throw new WebApiException(Status.UNAUTHORIZED, "Please register or login before creating projects");
+        }
         try {
-            Project project = projectManager.createProject(user);
+            String userid = ((UserInfo)subject.getPrincipal()).getOpenid();
+            Project project = projectManager.createProject( userid );
             if (shortname != null) {
                 project.setShortname(shortname);
                 project.sync();
