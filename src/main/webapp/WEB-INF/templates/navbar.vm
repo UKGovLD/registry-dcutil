@@ -1,8 +1,6 @@
+#set($subject = $lib.sec.subject)
 #if($subject.isAuthenticated())
   #set($user=$subject.principal.name)
-#else
-  ## Comment out during testing so can pass user in manually
-  ##set($user=false)
 #end
 
 <nav class="navbar navbar-default" role="navigation">
@@ -14,7 +12,7 @@
       <span class="icon-bar"></span>
     </button>
 ##    <a class="navbar-brand" href="$root/">Environment Registry Data Prep</a>
-    <a class="navbar-brand" href="$root/?user=Dave">Environment Registry Data Prep</a>
+    <a class="navbar-brand" href="$root">Environment Registry Data Prep</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,7 +30,7 @@
                       href="#logout-dialog" data-target="#logout-dialog" role="button" data-toggle="modal"><span class="glyphicon glyphicon-remove-circle"></span></a>
         </span>
         #else
-          <a href="$uiroot/login?return=/$uri">Login</a>
+          <a href="$uiroot/login?return=/">Login</a>
         #end
       </li>
     </ul>
