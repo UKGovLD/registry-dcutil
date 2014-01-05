@@ -58,22 +58,13 @@
       <button type="button" class="btn btn-default ajax-run" data-target="#progressPanel" data-action="$uiroot/run-conversion?project=$p.root">Run conversion</button>
       #if($p.resultFile)
         <button type="button" class="btn btn-default ajax-run" data-target="#progressPanel" data-action="$uiroot/show-data?project=$p.root">Show data</button>
-        <a class="btn btn-default" href="$root/project/$project/data">Download</a>
       #end
+      <a id="downloadButton" class="btn btn-default #if(!$p.resultFile)hide#end" href="$root/project/$project/data">Download</a>
       <div class="space-above" id="progressPanel"></div>
     </div>
 
     #if($tab == "browse")
-    <div class="tab-pane active" id="browse">
-      #set($result = $p.wrappedResult)
-      #set($r = $result.model.getNode($uri))
-      <h3>Browsing: $r.name</h3>
-      #if ($r.listProperties().isEmpty())
-        <p>Nothing known locally, try external link: <a href="$uri">$uri</a></p>
-      #else
-        #restable($r, "table-striped table-bordered table-condensed")
-      #end
-    </div>
+      #parse("tab-browse.vm")
     #end
 
   </div>

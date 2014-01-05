@@ -1,14 +1,14 @@
 #set($p=$projectManager.getProject($project))
 #set($result = $p.wrappedResult)
 
-<h3>Root of the collection</h3>
+<h3>Root of the collection #linkfor($result.root)</h3>
 
 #restable($result.root, "table-striped table-bordered table-condensed")
 
 <h3>The entries in the collection</h3>
 
 #foreach($entry in $result.entries)
-  <h4>$entry.name</h4>
+  <h4>#linkfor($entry)</h4>
   #restable($entry, "table-striped table-bordered table-condensed")
   #if( $foreach.count > 500 ) ... #break #end
 #end

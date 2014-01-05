@@ -6,6 +6,11 @@
 #if($report.succeeded())
   <div class="alert alert-success">Conversion succeeded</div>
   #parse("show-data.vm")
+   <script type="text/javascript">
+    $(function() {
+        $("#downloadButton").show().removeClass("hide");
+    });
+   </script>
 #else
   <div class="alert alert-danger">Conversion failed</div>
 #end
