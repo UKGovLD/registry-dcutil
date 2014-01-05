@@ -79,7 +79,7 @@ public class RequestProcessor {
         return velocity.render("show-project.vm", uriInfo.getPath(), context, uriInfo.getQueryParameters(), "project", project);
     }
     
-    @Path("project/{project}/data")
+    @Path("project/{project}/data.ttl")
     @GET
     @Produces(FULL_MIME_TURTLE)
     public Model resultDownload(@PathParam("project") String projectID) throws IOException {

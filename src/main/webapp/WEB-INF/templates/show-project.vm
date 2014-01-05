@@ -59,7 +59,7 @@
       #if($p.resultFile)
         <button type="button" class="btn btn-default ajax-run" data-target="#progressPanel" data-action="$uiroot/show-data?project=$p.root">Show data</button>
       #end
-      <a id="downloadButton" class="btn btn-default #if(!$p.resultFile)hide#end" href="$root/project/$project/data">Download</a>
+      <a id="downloadButton" class="btn btn-default #if(!$p.resultFile)hide#end" href="$root/project/$project/data.ttl">Download</a>
       <div class="space-above" id="progressPanel"></div>
     </div>
 
