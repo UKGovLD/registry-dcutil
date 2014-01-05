@@ -2,9 +2,18 @@
 
     <div class="tab-pane #if($tab == 'template')active#end" id="template">
       #if($p.templateName)
-        #set($template = $p.dataContext.getTemplate($p.templateName))
+        #set($template = $p.template)
         <p><strong>Template:</strong> $template.name</p>
         <p>$template.description</p>
+        #listColumns("Columns required for the template", $template.required())
+        #listColumns("Optional columns", $template.optional())
+        #if(!$template.isApplicableTo($p.preview(500).headers))
+          <div class="alert alert-danger">Template does not match data. Missing: 
+            #foreach($missing in $p.missingColumns())
+              $missing 
+            #end
+          </div>
+        #end
       #end
       <form class="form-inline" role="form" action="$root/system/select-template" method="post">
         <div class="form-group">

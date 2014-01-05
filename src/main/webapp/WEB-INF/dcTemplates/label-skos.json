@@ -2,6 +2,8 @@
     "name" : "labeled-skos",
     "description" : "SKOS template which uses concept labels as the URI segement",
     "type" : "Composite",
+    "required" : ["label"],
+    "optional" : ["description"],
     "oneOffs" : {
         "@id" : "{$dataset}",
         "<rdf:type>" : [ "<reg:Register>", "<skos:ConceptScheme>"],
@@ -9,14 +11,6 @@
     },
     "templates" : {
         "bind" : { "notation" : "{label.toSegment()}"},
-        "template" : {
-            "@id" : "<{$base}/{notation}>",
-            "<rdf:type>" : "<skos:Concept>",
-            "<skos:notation>" : "{notation.toString()}",
-            "<dct:description>" : "{description}",
-            "<skos:prefLabel>" : "{label}",
-            "<rdfs:label>" : "{label}",
-            "<skos:inScheme>" : "{$dataset}"
-        }
+        "template" : "simple-skos"
     }
 }

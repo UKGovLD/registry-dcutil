@@ -2,6 +2,8 @@
     "name" : "simple-skos",
     "description" : "Basic template for SKOS support notation, label and optional description fields",
     "type" : "Composite",
+    "required" : ["label", "notation"],
+    "optional" : ["description"],
     "oneOffs" : {
         "@id" : "{$dataset}",
         "<rdf:type>" : [ "<reg:Register>", "<skos:ConceptScheme>"],

@@ -9,9 +9,12 @@
 
 package com.github.ukgovld.dcutil.core;
 
+import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.epimorphics.appbase.core.AppConfig;
 import com.epimorphics.dclib.framework.ConverterProcess;
@@ -54,6 +57,8 @@ public class Project {
     @JsonIgnore    protected ProjectManager pm;
     @JsonIgnore    protected MetadataModel metadata;
     @JsonIgnore    protected Model result;
+    @JsonIgnore    protected CSVPreview preview;
+    @JsonIgnore    protected Template template;
     
     protected void setProjectManager(ProjectManager pm) {
         this.pm = pm;
@@ -71,6 +76,7 @@ public class Project {
     }
     public void setTemplateName(String templateFile) {
         this.templateName = templateFile;
+        template = null;
     }
     
     public String getSourceFile() {
@@ -78,6 +84,7 @@ public class Project {
     }
     public void setSourceFile(String sourceFile) {
         this.sourceFile = sourceFile;
+        preview = null;
     }
     
     public String getShortname() {
@@ -104,6 +111,7 @@ public class Project {
     public void setLocalTemplateFile(String localTemplateFile) {
         this.localTemplateFile = localTemplateFile;
         dc = null;
+        template = null;
     }
 
     public String fullFileName(String file) {
@@ -239,10 +247,47 @@ public class Project {
      * @throws IOException 
      */
     public CSVPreview preview(int maxRows) throws IOException {
-        return new CSVPreview(readFile(sourceFile), maxRows);
+        if (preview == null) {
+            preview = new CSVPreview(readFile(sourceFile), maxRows);
+        }
+        return preview;
     }
     
     private InputStream readFile(String file) throws IOException {
         return pm.getStore().read( fullFileName(file) );
+    }
+    
+    /**
+     * Access the template
+     */
+    public Template getTemplate() throws IOException {
+        if (template == null) {
+            template = getDataContext().getTemplate(templateName);
+        }
+        return template;
+    }
+    
+    /**
+     * Compute list of required columns that are missing
+     */
+    public List<String> missingColumns() throws IOException {
+        List<String> missing = new ArrayList<>();
+        Template t = getTemplate();
+        if (t != null && sourceFile != null) {
+            String[] headers = preview(500).getHeaders();
+            for (String col : t.required()) {
+                boolean foundIt = false;
+                for (String h : headers) {
+                    if (h.equals(col)) {
+                        foundIt = true;
+                        break;
+                    }
+                }
+                if (!foundIt) {
+                    missing.add( col );
+                }
+            }
+        }
+        return missing;
     }
 }

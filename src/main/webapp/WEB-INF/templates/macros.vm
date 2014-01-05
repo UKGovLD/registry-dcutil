@@ -96,3 +96,16 @@
             </div>
         </div>
 #end
+
+## Render a list of columns as part of template displayu
+#macro(listColumns $header $l)
+        #if($l && !$l.isEmpty())
+          <h4>$header</h4>
+          <ul>
+            #foreach($col in $l)
+              <li>$col</li>
+            #end
+          </ul>
+        #end
+
+#end
