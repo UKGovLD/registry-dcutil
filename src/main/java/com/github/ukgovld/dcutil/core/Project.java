@@ -9,7 +9,6 @@
 
 package com.github.ukgovld.dcutil.core;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -110,6 +109,7 @@ public class Project {
 
     public void setLocalTemplateFile(String localTemplateFile) {
         this.localTemplateFile = localTemplateFile;
+        this.templateName = localTemplateFile;
         dc = null;
         template = null;
     }
@@ -135,7 +135,7 @@ public class Project {
                 InputStream is = readFile(localTemplateFile);
                 Template template = TemplateFactory.templateFrom(is, dc);
                 is.close();
-                dc.registerTemplate(template);
+                dc.registerTemplate(templateName, template);
             }
             dc.setPrefixes( getMetadata().getModel() );
         }

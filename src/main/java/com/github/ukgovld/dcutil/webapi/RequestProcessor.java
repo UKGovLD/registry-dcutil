@@ -119,25 +119,14 @@ public class RequestProcessor {
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail ) {
 
-        String filename = fileDetail.getFileName();
-
         Project project = projectManager.getProject(projectID);
         if (project == null) {
             throw new WebApiException(500, "Can't locate the project: " + projectID);
         }
 
-        // Upload file
-        try {
-            FileStore store = projectManager.getStore();
-            OutputStream out = store.write(project.getRoot() + "/" + filename);
-            FileUtil.copyResource(uploadedInputStream, out);
-            out.close();
-        } catch (IOException e) {
-            log.error("Failed to upload data file", e);
-            throw new WebApiException(Status.BAD_REQUEST, "Failed to upload data file: " + e);
-        }
-        
-        // update project
+        String filename = fileDetail.getFileName();
+        uploadFile(filename, uploadedInputStream, project);
+
         project.setSourceFile(filename);
         sync(project);
         return redirect(project, null);
@@ -145,19 +134,42 @@ public class RequestProcessor {
     
     @POST
     @Path("system/select-template")
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+//    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+    @Consumes({MediaType.MULTIPART_FORM_DATA})
     public Response selectTemplate(@Context HttpHeaders hh, 
-            @FormParam("project") String projectID,
-            @FormParam("template") String templateName,
-            @FormParam("tab") String tab) {
+            @FormDataParam("project") String projectID,
+            @FormDataParam("template") String templateName,
+            @FormDataParam("file") InputStream uploadedInputStream,
+            @FormDataParam("file") FormDataContentDisposition fileDetail,
+            @FormDataParam("tab") String tab) {
         Project project = projectManager.getProject(projectID);
-        if (templateName == null || templateName.isEmpty()) {
-            project.setTemplateName(null);
+        String filename = fileDetail.getFileName();
+        if (!filename.isEmpty()) {
+            // Upload a new template
+            uploadFile(filename, uploadedInputStream, project);
+            project.setLocalTemplateFile(filename);
         } else {
-            project.setTemplateName(templateName);
+            // Choose a system template
+            if (templateName == null || templateName.isEmpty()) {
+                project.setTemplateName(null);
+            } else {
+                project.setTemplateName(templateName);
+            }
         }
         sync(project);
         return redirect(project, tab);
+    }
+    
+    private void uploadFile(String filename, InputStream stream, Project project ) {
+        try {
+            FileStore store = projectManager.getStore();
+            OutputStream out = store.write(project.getRoot() + "/" + filename);
+            FileUtil.copyResource(stream, out);
+            out.close();
+        } catch (IOException e) {
+            log.error("Failed to upload file", e);
+            throw new WebApiException(Status.BAD_REQUEST, "Failed to upload data file: " + e);
+        }
     }
     
     @POST
