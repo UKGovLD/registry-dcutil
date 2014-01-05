@@ -114,7 +114,7 @@ public class RequestProcessor {
     @POST
     @Path("system/upload-data")
     @Consumes({MediaType.MULTIPART_FORM_DATA})
-    public Response fileForm(@Context HttpHeaders hh,
+    public Response uploadData(@Context HttpHeaders hh,
             @FormDataParam("project") String projectID,
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail ) {
@@ -130,6 +130,28 @@ public class RequestProcessor {
         project.setSourceFile(filename);
         sync(project);
         return redirect(project, null);
+    }
+
+    @POST
+    @Path("system/upload-metadata")
+    @Consumes({MediaType.MULTIPART_FORM_DATA})
+    public Response uploadMetadata(@Context HttpHeaders hh,
+            @FormDataParam("project") String projectID,
+            @FormDataParam("file") InputStream uploadedInputStream,
+            @FormDataParam("file") FormDataContentDisposition fileDetail,
+            @FormDataParam("tab") String tab) {
+
+        Project project = projectManager.getProject(projectID);
+        if (project == null) {
+            throw new WebApiException(500, "Can't locate the project: " + projectID);
+        }
+
+        String filename = fileDetail.getFileName();
+        uploadFile(filename, uploadedInputStream, project);
+
+        project.setMetadataFile(filename);
+        sync(project);
+        return redirect(project, tab);
     }
     
     @POST
