@@ -18,7 +18,7 @@ import com.epimorphics.appbase.security.AppRealm;
 import com.epimorphics.appbase.security.UserStore;
 
 public class DBProjectList extends ComponentBase implements ProjectList {
-    static final String OWNER_ACTION = "owner";
+    public static final String OWNER_ACTION = "owner";
     
     protected UserStore userstore;
 
@@ -35,14 +35,17 @@ public class DBProjectList extends ComponentBase implements ProjectList {
             }
         }
         Collections.sort(projects);
-        System.out.println("Projects for " + user + " " +projects);
         return projects;
     }
 
     @Override
     public void add(String user, String project) {
         userstore.addPermision(user, OWNER_ACTION + ":" + project);
-        System.out.println("Setting owner " + user + " on " + project);
+    }
+
+    @Override
+    public void remove(String user, String project) {
+        userstore.removePermission(user, project);
     }
 
 }

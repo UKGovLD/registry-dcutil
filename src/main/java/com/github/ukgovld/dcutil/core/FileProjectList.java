@@ -71,4 +71,20 @@ public class FileProjectList implements ProjectList {
         }
     }
 
+    @Override
+    public synchronized void remove(String user, String project) {
+        try {
+            List<String> projectNames = userProjects.get(user);
+            if (projectNames == null) {
+                throw new EpiException("Can't find project " + project + " for user " + user);
+            }
+            projectNames.remove(project);
+            ObjectOutputStream out = new ObjectOutputStream( store.write(PROJECT_LIST_FILENAME) );
+            out.writeObject( userProjects );
+            out.close();
+        } catch (IOException e) {
+            throw new EpiException(e);
+        }
+    }
+
 }

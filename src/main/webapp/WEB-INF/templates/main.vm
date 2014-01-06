@@ -7,7 +7,17 @@
     #foreach($project in $projectManager.listUserProjects($subject.principal.openid))
       <tr>
         <td>
-            <a href="$root/project/$project.root">$project.shortname</a>
+          <div class="row">
+            <form role="form" action="$root/system/delete-project" method="post">
+              <div class="col-md-4">
+                <a href="$root/project/$project.root">$project.shortname</a>
+              </div>
+              <input type="hidden" name="project" value="$project.root" />
+              <div class="col-md-offset-1 col-md-1">
+                <button class="btn btn-sm" type="submit"><span class="glyphicon glyphicon-remove"></span></button>
+              </div>
+            </form>
+          </div>
         </td>
       </tr>
     #end

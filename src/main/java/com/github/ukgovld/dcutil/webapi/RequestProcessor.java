@@ -32,6 +32,7 @@ import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +43,7 @@ import com.epimorphics.appbase.templates.VelocityRender;
 import com.epimorphics.appbase.webapi.WebApiException;
 import com.epimorphics.dclib.storage.FileStore;
 import com.epimorphics.util.FileUtil;
+import com.github.ukgovld.dcutil.core.DBProjectList;
 import com.github.ukgovld.dcutil.core.MetadataModel;
 import com.github.ukgovld.dcutil.core.Project;
 import com.github.ukgovld.dcutil.core.ProjectManager;
@@ -225,6 +227,28 @@ public class RequestProcessor {
             throw new WebApiException(500, "I/O error trying to update the project metadata: " + e);
         }
         return redirect(project, tab);
+    }
+    
+    @POST
+    @Path("system/delete-project")
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+    public Response deleteProject(@FormParam("project") String project) {
+        Subject subject = SecurityUtils.getSubject();
+        if (!subject.isAuthenticated()) {
+            throw new WebApiException(Status.UNAUTHORIZED, "Please register or login before deleting projects!");
+        }
+        try {
+            subject.checkPermission(DBProjectList.OWNER_ACTION + ":" + project);
+            String userid = ((UserInfo)subject.getPrincipal()).getOpenid();
+            projectManager.removeProject(userid, project);
+            return Response.seeOther( uriInfo.getBaseUri() ).build();
+        } catch (IOException e) {
+            log.error("Failed to create project", e);
+            throw new WebApiException(500, "I/O error trying to create the project: " + e);
+        } catch (AuthorizationException ea) {
+            log.error("User " + subject.getPrincipal() + " tried to delete project " + project + " without permission");
+            throw new WebApiException(Status.UNAUTHORIZED, "Can only delete projects that you own");
+        }
     }
     
     private void sync(Project project) {

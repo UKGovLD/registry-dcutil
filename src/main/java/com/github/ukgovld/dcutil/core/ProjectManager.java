@@ -73,7 +73,7 @@ public class ProjectManager extends ComponentBase {
     /**
      * List all the projects associated with a given user
      */
-    public List<Project> listUserProjects(String user) {
+    public synchronized List<Project> listUserProjects(String user) {
         List<String> projectNames = projectList.get(user);
         if (projectNames == null) {
             return new ArrayList<>();
@@ -92,7 +92,7 @@ public class ProjectManager extends ComponentBase {
     /**
      * Load a project definition from its folder name.
      */
-    public Project getProject(String name) {
+    public synchronized Project getProject(String name) {
         Project project = (Project) projectCache.get(name);
         if (project == null) {
             try {
@@ -112,7 +112,7 @@ public class ProjectManager extends ComponentBase {
     /**
      * Create a new project and associated folder for a user
      */
-    public Project createProject(String user) throws IOException {
+    public synchronized Project createProject(String user) throws IOException {
         Project project = new Project( );
         project.setProjectManager(this);
         String root = allocProjectName();
@@ -122,6 +122,14 @@ public class ProjectManager extends ComponentBase {
         project.sync();
         projectList.add(user, root);
         return project;
+    }
+    
+    /**
+     * Delete a project area and remove it from the user's project list.
+     */
+    public synchronized void removeProject(String user, String project) throws IOException {
+        projectList.remove(user, project);
+        store.deleteFolder(project);
     }
     
     private synchronized String allocProjectName() {

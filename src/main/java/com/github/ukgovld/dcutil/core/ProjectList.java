@@ -26,4 +26,9 @@ public interface ProjectList {
      * Record a new project name for the given user.
      */
     void add(String user, String project);
+    
+    /**
+     * Remove a project from the list for the given user
+     */
+    void remove(String user, String project);
 }
