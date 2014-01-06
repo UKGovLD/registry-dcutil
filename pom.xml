@@ -2,11 +2,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.ukgovlds</groupId>
   <artifactId>registry-dcutil</artifactId>
+  <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Registry Data Converstion Utility</name>
 
- <scm>
-    <developerConnection>scm:git:git@codebasehq.com:epimorphics/data-fabric/minibrowse.git</developerConnection>
+  <scm>
+    <developerConnection>scm:git:git@github.com:UKGovLD/registry-dcutil.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
@@ -31,16 +32,6 @@
     </repository>
 
     <repository>
-      <id>repo-epi</id>
-      <name>Epimorphics repository</name>
-      <layout>default</layout>
-      <url>http://www.epimorphics.com/maven2</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-
-    <repository>
       <releases>
         <enabled>true</enabled>
       </releases>
@@ -51,26 +42,45 @@
       <name>Epimorphics Public Repository</name>
       <url>http://repository.epimorphics.com</url>
     </repository>
+    
+    <repository>  
+     <id>ukgovld-s3-snapshot</id>  
+     <name>UKGovLD snapshot repository</name>  
+     <url>s3://ukgovld/snapshot</url>  
+     <releases>  
+       <enabled>false</enabled>  
+     </releases>  
+     <snapshots>  
+       <enabled>true</enabled>  
+     </snapshots>  
+    </repository>  
+    
+    <repository>  
+     <id>ukgovld-s3-release</id>  
+     <name>UKGovLD release repository</name>  
+     <url>s3://ukgovld/release</url>  
+     <releases>  
+       <enabled>true</enabled>  
+     </releases>  
+     <snapshots>  
+       <enabled>false</enabled>  
+     </snapshots>  
+    </repository>  
 
   </repositories>
 
-  <pluginRepositories>
-    <pluginRepository>
-      <id>repo-epi</id>
-      <name>Epimorphics repository</name>
-      <layout>default</layout>
-      <url>http://www.epimorphics.com/maven2</url>
-      <releases>
-        <updatePolicy>always</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>interval:30</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
+   <distributionManagement>  
+     <repository>  
+       <id>ukgovld-s3-release</id>  
+       <name>UKGovLD release repository</name>  
+       <url>s3://ukgovld/release</url>  
+     </repository>  
+     <snapshotRepository>  
+       <id>ukgovld-s3-snapshot</id>  
+       <name>UKGovLD snapshot repository</name>  
+       <url>s3://ukgovld/snapshot</url>  
+     </snapshotRepository>  
+   </distributionManagement> 
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -250,7 +260,15 @@
         <artifactId>wagon-ftp</artifactId>
         <version>2.2</version>
       </extension>
+      
+     <extension>  
+       <groupId>org.springframework.build.aws</groupId>  
+       <artifactId>org.springframework.build.aws.maven</artifactId>  
+       <version>3.0.0.RELEASE</version>  
+     </extension>  
+      
     </extensions>
+    
   </build>
 
 </project>
