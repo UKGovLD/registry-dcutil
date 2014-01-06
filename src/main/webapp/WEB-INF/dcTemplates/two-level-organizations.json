@@ -25,7 +25,8 @@
     "referenced" : [
         {
             "name" : "organization",
-            "description" : "Template to generate a single organization record, normally used from other templates and not for direct use. Uses label and notation columns for the organzation, and optionally a description."
+            "description" : "Template to generate a single organization record, normally used from other templates and not for direct use. Uses label and notation columns for the organzation, and optionally a description.",
+            "required" : ["label", "notation"],
             "@id" : "<{$base}/{notation}>",
             "<skos:prefLabel>" : "{label}",
             "<rdfs:label>" : "{label}",
