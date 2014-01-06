@@ -41,7 +41,7 @@
     <li><a href="#conversion" data-toggle="tab">Conversion</a></li>
     #end
     #if($tab == "browse")
-    <li active><a href="#browse" data-toggle="tab">Browse</a></li>
+    <li class="active"><a href="#browse" data-toggle="tab">Browse</a></li>
     #end
   </ul>
 

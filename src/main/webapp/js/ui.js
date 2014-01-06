@@ -8,7 +8,9 @@ $(function() {
     });
 
     // Data table auto-config
-    $(".data-table").dataTable();
+    $(".data-table").dataTable( {
+        "aaSorting": []
+    } );
 
     // Generic ajax actions
     $(".ajax-run").each(function() {

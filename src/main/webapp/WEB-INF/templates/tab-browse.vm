@@ -5,6 +5,7 @@
       #if ($r.listProperties().isEmpty())
         <p>Nothing known locally, try external link: <a href="$uri">$uri</a></p>
       #else
+        <p><strong>URI:</strong> $r.uRI</p>
         #restable($r, "table-striped table-bordered table-condensed")
         #set($in=$r.listInLinks())
         #if(!$in.isEmpty())

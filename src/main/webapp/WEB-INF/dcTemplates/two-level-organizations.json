@@ -1,0 +1,38 @@
+{
+    "name" : "two-level-organizations",
+    "description" : "Template for Organization style code lists which supports two levels of organization. The column org gives a label for the top level organizations. For any suborganizations then put them under the row for their parent with labels in the column suborg. In both cases the id from the organization will be generated from the labels. The optional description column gives textual description for the organization.",
+    "type" : "Composite",
+    "required" : [],
+    "optional" : ["org", "suborg", "description"],
+    "oneOffs" : {
+        "@id" : "{$dataset}",
+        "<rdf:type>" : [ "<reg:Register>", "<skos:ConceptScheme>"],
+        "<reg:inverseMembershipPredicate>" : "<skos:inScheme>"
+    },
+    "templates" : {
+        "parentLink" : "<org:subOrganizationOf>" ,
+        "childLink" : "<org:hasSubOrganization>" ,
+        "invTopLink" : "<skos:topConceptOf>",
+        "0" : { 
+            "bind" : {"notation" : "{org.toSegment()}", "label" : "{org}"},
+            "template" : "organization" 
+        },
+        "1" : { 
+            "bind" : {"notation" : "{org.toSegment()}-{suborg.toSegment()}", "label" : "{suborg}"},
+            "template" : "organization" 
+        }
+    },
+    "referenced" : [
+        {
+            "name" : "organization",
+            "description" : "Template to generate a single organization record, normally used from other templates and not for direct use. Uses label and notation columns for the organzation, and optionally a description."
+            "@id" : "<{$base}/{notation}>",
+            "<skos:prefLabel>" : "{label}",
+            "<rdfs:label>" : "{label}",
+            "<rdf:type>" : "<org:Organization>",
+            "<skos:notation>" : "{notation.toString()}",
+            "<dct:description>" : "{description}",
+            "<skos:inScheme>" : "{$dataset}"           
+         }
+    ]
+}

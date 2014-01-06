@@ -1,6 +1,6 @@
 {
     "name" : "simple-skos",
-    "description" : "Basic template for SKOS support notation, label and optional description fields",
+    "description" : "Template for generating code lists as SKOS concept schemes. Takes the label and code ('notation') for each concept from the csv, along with an optional text description.",
     "type" : "Composite",
     "required" : ["label", "notation"],
     "optional" : ["description"],

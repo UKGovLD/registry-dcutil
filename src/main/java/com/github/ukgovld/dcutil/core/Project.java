@@ -73,6 +73,7 @@ public class Project {
     public String getTemplateName() {
         return templateName;
     }
+    
     public void setTemplateName(String templateFile) {
         this.templateName = templateFile;
         template = null;
@@ -108,10 +109,12 @@ public class Project {
     }
 
     public void setLocalTemplateFile(String localTemplateFile) {
-        this.localTemplateFile = localTemplateFile;
-        this.templateName = localTemplateFile;
-        dc = null;
-        template = null;
+        if (localTemplateFile != null) {
+            this.localTemplateFile = localTemplateFile;
+            this.templateName = localTemplateFile;
+            dc = null;
+            template = null;
+        }
     }
 
     public String fullFileName(String file) {
