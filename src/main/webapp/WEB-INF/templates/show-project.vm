@@ -15,7 +15,7 @@
     <div class="col-md-10">$metadata.description</div>
   </div>
 
-  #if($p.templateName && $p.sourceFile && $metadata.owner)
+  #if($p.templateName && $p.sourceFile && $metadata.category)
     <p>Project is ready to run conversion</p>
   #else
     <p>Prepare project:
@@ -26,7 +26,7 @@
         #if(!$p.templateName)
           <li>choose or upload a conversion template</li>
         #end
-        #if(!$metadata.owner)
+        #if(!$metadata.category)
           <li>update the metadata for the code list</li>
         #end
       </ul>
@@ -36,8 +36,8 @@
   <ul class="nav nav-tabs">
     <li #if(!$tab)class="active"#end><a href="#data" data-toggle="tab">Data #if($p.sourceFile)<span class="glyphicon glyphicon-ok"></span>#end</a></li>
     <li #if($tab == "template")class="active"#end><a href="#template" data-toggle="tab">Template #if($p.templateName)<span class="glyphicon glyphicon-ok"></span>#end</a></li>
-    <li #if($tab == "metadata")class="active"#end><a href="#metadata" data-toggle="tab">Metadata #if($metadata.owner)<span class="glyphicon glyphicon-ok"></span>#end</a></li>
-    #if($p.templateName && $p.sourceFile && $metadata.owner)
+    <li #if($tab == "metadata")class="active"#end><a href="#metadata" data-toggle="tab">Metadata #if($metadata.category)<span class="glyphicon glyphicon-ok"></span>#end</a></li>
+    #if($p.templateName && $p.sourceFile && $metadata.category)
     <li><a href="#conversion" data-toggle="tab">Conversion</a></li>
     #end
     #if($tab == "browse")
