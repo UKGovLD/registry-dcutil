@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-RELEASE=snapshot/com/github/ukgovlds/registry-dcutil/0.0.1-SNAPSHOT/registry-dcutil-0.0.1-20140307.155501-3.war
+RELEASE=snapshot/com/github/ukgovlds/registry-dcutil/0.0.1-SNAPSHOT/registry-dcutil-0.0.1-20140307.170653-4.war
 
 echo "** General updates"
 yum update -y
