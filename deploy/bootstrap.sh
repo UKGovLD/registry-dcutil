@@ -3,12 +3,13 @@ set -e
 
 RELEASE=snapshot/com/github/ukgovlds/registry-dcutil/0.0.1-SNAPSHOT/registry-dcutil-0.0.1-20140307.155501-3.war
 
-apt-get update -y
-apt-get install -y curl chkconfig
+echo "** General updates"
+yum update -y
+yum install -y curl chkconfig
 
-. install-nginx.sh
-. install-java.sh
-. mount-ebs.sh
+. /vagrant/install-nginx.sh
+. /vagrant/install-java.sh
+. /vagrant/mount-ebs.sh
 
 # Configure runtime areas
 if ! blkid | grep /dev/xvdf; then
@@ -24,7 +25,7 @@ else
   # No attached volume, just just create empty ldregistry areas
   if [ ! -d "/var/opt/dcutil" ]; then
     mkdir /var/opt/dcutil
-    chown tomcat7 /var/opt/dcutil
+    chown tomcat /var/opt/dcutil
   fi
 fi
 
