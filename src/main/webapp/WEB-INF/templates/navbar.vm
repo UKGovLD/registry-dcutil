@@ -17,7 +17,9 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
+    #if($user)
       <li><a href="#new-project-dialog" data-target="#new-project-dialog" role="button" data-toggle="modal">New Project</a></li>
+    #end
     </ul>
 
     <ul class="nav pull-right">

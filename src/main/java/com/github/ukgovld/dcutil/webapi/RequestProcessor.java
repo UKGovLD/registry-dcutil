@@ -26,6 +26,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriBuilder;
@@ -43,6 +44,7 @@ import com.epimorphics.appbase.templates.VelocityRender;
 import com.epimorphics.appbase.webapi.WebApiException;
 import com.epimorphics.dclib.storage.FileStore;
 import com.epimorphics.util.FileUtil;
+import com.epimorphics.util.NameUtils;
 import com.github.ukgovld.dcutil.core.DBProjectList;
 import com.github.ukgovld.dcutil.core.MetadataModel;
 import com.github.ukgovld.dcutil.core.Project;
@@ -60,6 +62,8 @@ import com.sun.jersey.multipart.FormDataParam;
 public class RequestProcessor {
     static final Logger log = LoggerFactory.getLogger( RequestProcessor.class );
     public static final String FULL_MIME_TURTLE = "text/turtle; charset=UTF-8";
+    public static final String CONTENT_DISPOSITION_HEADER = "Content-Disposition";
+    public static final String CONTENT_DISPOSITION_FMT = "attachment; filename=\"%s.%s\"";
     
     protected @Context ServletContext context;
     protected @Context UriInfo uriInfo;
@@ -84,9 +88,15 @@ public class RequestProcessor {
     @Path("project/{project}/data.ttl")
     @GET
     @Produces(FULL_MIME_TURTLE)
-    public Model resultDownload(@PathParam("project") String projectID) throws IOException {
+    public Response resultDownload(@PathParam("project") String projectID) throws IOException {
         Project project = projectManager.getProject(projectID);
-        return project.getResult();
+        return downloadresonse(project.getResult(), FULL_MIME_TURTLE, "output", "ttl");
+    }
+
+    private Response downloadresonse(Object entity, String mime, String fname, String ext) {
+        ResponseBuilder builder = Response.ok().type(mime).entity(entity);
+        builder.header(CONTENT_DISPOSITION_HEADER, String.format(CONTENT_DISPOSITION_FMT, fname, ext));
+        return builder.build();
     }
 
     @POST
