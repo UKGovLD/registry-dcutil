@@ -2,6 +2,7 @@
     "name" : "two-level-organizations",
     "description" : "Template for Organization style code lists which supports two levels of organization. The column org gives a label for the top level organizations. For any suborganizations then put them under the row for their parent with labels in the column suborg. In both cases the id from the organization will be generated from the labels. The optional description column gives textual description for the organization.",
     "type" : "Composite",
+    "prefixes" : { "org" : "http://www.w3.org/ns/org#" },
     "required" : [],
     "optional" : ["org", "suborg", "description"],
     "oneOffs" : {

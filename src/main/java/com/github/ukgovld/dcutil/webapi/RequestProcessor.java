@@ -163,23 +163,23 @@ public class RequestProcessor {
     public Response selectTemplate(@Context HttpHeaders hh, 
             @FormDataParam("project") String projectID,
             @FormDataParam("template") String templateName,
-            @FormDataParam("file") InputStream uploadedInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail,
+//            @FormDataParam("file") InputStream uploadedInputStream,
+//            @FormDataParam("file") FormDataContentDisposition fileDetail,
             @FormDataParam("tab") String tab) {
         Project project = projectManager.getProject(projectID);
-        String filename = fileDetail.getFileName();
-        if (!filename.isEmpty()) {
-            // Upload a new template
-            uploadFile(filename, uploadedInputStream, project);
-            project.setLocalTemplateFile(filename);
-        } else {
+//        String filename = fileDetail.getFileName();
+//        if (!filename.isEmpty()) {
+//            // Upload a new template
+//            uploadFile(filename, uploadedInputStream, project);
+//            project.setLocalTemplateFile(filename);
+//        } else {
             // Choose a system template
             if (templateName == null || templateName.isEmpty()) {
                 project.setTemplateName(null);
             } else {
                 project.setTemplateName(templateName);
             }
-        }
+//        }
         sync(project);
         return redirect(project, tab);
     }

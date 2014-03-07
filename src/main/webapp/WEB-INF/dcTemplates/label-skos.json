@@ -1,9 +1,9 @@
 {       
     "name" : "labeled-skos",
-    "description" : "Template for generating code lists as SKOS concept schemes. Takes the label for each concept from the csv, along with an optional text description. Generates the code ('notation') from the label text.",
+    "description" : "Template for generating code lists as SKOS concept schemes. Takes the label for each concept from the csv, along with an optional text description/note/definition. Generates the code ('notation') from the label text.",
     "type" : "Composite",
     "required" : ["label"],
-    "optional" : ["description"],
+    "optional" : ["description", "note", "definition"],
     "oneOffs" : {
         "@id" : "{$dataset}",
         "<rdf:type>" : [ "<reg:Register>", "<skos:ConceptScheme>"],

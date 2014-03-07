@@ -25,13 +25,15 @@
             #end
           </select>
         </div>
-        <div class="form-group">
-          <label for="file1">Or upload a file:</label>
-          <input class="form-control" type="file" id="file1" name="file">
-        </div>
+        
+        ## Suppressing template upload for safety
+        ##<div class="form-group">
+        ##  <label for="file1">Or upload a file:</label>
+        ##  <input class="form-control" type="file" id="file1" name="file">
+        ##</div>
         <input type="hidden" name="project" value="$p.root" />
         <input type="hidden" name="tab" value="template" />
-        <button type="submit" class="btn btn-default">upload</button>
+        ##<button type="submit" class="btn btn-default">upload</button>
       </form>
       #if($p.templateName)
         <div class="panel-group space-above">
