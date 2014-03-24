@@ -12,7 +12,7 @@
     "templates" : {
         "@id" : "<{$base}/{notation}>",
         "<rdf:type>" : "<skos:Concept>",
-        "<skos:notation>" : "{notation.toString()}",
+        "<skos:notation>" : "{notation.toSegment()}",
         "<dct:description>" : "{description}",
         "<skos:prefLabel>" : "{label}",
         "<skos:note>" : "{note}",
