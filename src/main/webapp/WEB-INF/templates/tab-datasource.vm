@@ -33,7 +33,7 @@
                   <thead>
                     <tr>
                       #foreach($header in $preview.headers)
-                      <th>$header</th>
+                      <th>$lib.escapeHtml($header)</th>
                       #end
                     </tr>
                   </thead>
@@ -41,7 +41,7 @@
                     #foreach($row in $preview.rows)
                     <tr>
                       #foreach($header in $preview.headers)
-                      <td>$row.get($header)</td>
+                      <td>$lib.escapeHtml($row.get($header))</td>
                       #end
                     </tr>
                     #end
