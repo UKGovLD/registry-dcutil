@@ -11,6 +11,7 @@ package com.github.ukgovld.dcutil.core;
 
 import com.epimorphics.rdfutil.RDFUtil;
 import com.epimorphics.registry.vocab.RegistryVocab;
+import com.epimorphics.util.NameUtils;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -50,6 +51,7 @@ public class MetadataModel {
         return root.getURI();
     }
     public void setShortname(String shortname) {
+        shortname = NameUtils.safeName(shortname);
         root = ResourceUtils.renameResource(root, shortname);
     }
     

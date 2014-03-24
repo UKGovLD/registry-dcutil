@@ -85,6 +85,9 @@ public class Project {
     public void setSourceFile(String sourceFile) {
         this.sourceFile = sourceFile;
         preview = null;
+        result = null;
+        templateName = null;
+        resultFile = null;
     }
     
     public String getShortname() {
@@ -195,6 +198,7 @@ public class Project {
             OutputStream out = pm.getStore().write( fullFileName(resultFile) );
             outputModel.write(out, "Turtle");
             out.close();
+            result = outputModel;
         }
         return reporter;
     }
