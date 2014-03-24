@@ -1,7 +1,7 @@
 ## Global macros
 
 ## Determine the href value to use in a link to the given resource, reference URIs go external
-#macro(linkhref $res)?tab=browse&uri=$lib.pathEncode($res.uRI)#end
+#macro(linkhref $res)?tab=browse&res=$lib.pathEncode($res.uRI)#end
 
 ## Inject a link to the given resource
 #macro(linkfor $res)

@@ -7,7 +7,9 @@
     "oneOffs" : {
         "@id" : "{$dataset}",
         "<rdf:type>" : [ "<reg:Register>", "<skos:ConceptScheme>"],
-        "<reg:inverseMembershipPredicate>" : "<skos:inScheme>"
+        "<reg:inverseMembershipPredicate>" : "<skos:inScheme>",
+        "<http://purl.org/linked-data/registry-ui#hierarchyChildProperty>" : "<skos:narrower>",
+        "<http://purl.org/linked-data/registry-ui#hierarchyRootProperty>" : "<skos:topConceptOf>"
     },
     "templates" : {
         "parentLink" : "<skos:broader>" ,

@@ -5,12 +5,13 @@
 #end
 #if($report.succeeded())
   <div class="alert alert-success">Conversion succeeded</div>
-  #parse("show-data.vm")
-   <script type="text/javascript">
-    $(function() {
-        $("#downloadButton").show().removeClass("hide");
-    });
-   </script>
+  <a class="btn btn-default" href="?tab=browse">Browse data</a>
+##  #parse("show-data.vm")
+##   <script type="text/javascript">
+##    $(function() {
+##        $("#downloadButton").show().removeClass("hide");
+##    });
+##   </script>
 #else
   <div class="alert alert-danger">Conversion failed</div>
 #end

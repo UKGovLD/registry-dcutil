@@ -40,8 +40,8 @@
     #if($p.templateName && $p.sourceFile && $metadata.category)
     <li><a href="#conversion" data-toggle="tab">Conversion</a></li>
     #end
-    #if($tab == "browse")
-    <li class="active"><a href="#browse" data-toggle="tab">Browse</a></li>
+    #if($tab == "browse" || $p.resultFile)
+    <li #if($tab == "browse")class="active"#end><a href="#browse" data-toggle="tab">Browse</a></li>
     #end
   </ul>
 
@@ -56,14 +56,14 @@
 
     <div class="tab-pane" id="conversion">
       <button type="button" class="btn btn-default ajax-run" data-target="#progressPanel" data-action="$uiroot/run-conversion?project=$p.root">Run conversion</button>
-      #if($p.resultFile)
-        <button type="button" class="btn btn-default ajax-run" data-target="#progressPanel" data-action="$uiroot/show-data?project=$p.root">Show data</button>
-      #end
+##      #if($p.resultFile)
+##        <button type="button" class="btn btn-default ajax-run" data-target="#progressPanel" data-action="$uiroot/show-data?project=$p.root">Show data</button>
+##      #end
       <a id="downloadButton" class="btn btn-default #if(!$p.resultFile)hide#end" href="$root/project/$project/data.ttl">Download</a>
       <div class="space-above" id="progressPanel"></div>
     </div>
 
-    #if($tab == "browse")
+    #if($tab == "browse" || $p.resultFile)
       #parse("tab-browse.vm")
     #end
 
