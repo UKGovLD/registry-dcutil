@@ -1,0 +1,22 @@
+#set($rootType = $result.root.getPropertyValue("http://purl.org/linked-data/registry-ui#hierarchyRootType"))
+#set($rootProp = $result.root.getPropertyValue("http://purl.org/linked-data/registry-ui#hierarchyRootProperty"))
+#set($x=$result.root.getPropertyValue("http://purl.org/linked-data/registry-ui#hierarchyChildProperty"))
+#if($x.isLiteral())
+    #set($narrow=$x.lexicalForm)
+#else
+    #set($narrow=$x.uRI)
+#end
+
+#foreach($entry in $result.entries)
+  #if($rootType)
+    #if($entry.hasResourceValue("rdf:type", $rootType))
+      #hierEntry($entry, $narrow)
+    #end 
+  #elseif($rootProp)
+    #if($entry.getPropertyValue($rootProp))
+      #hierEntry($entry, $narrow)
+    #end
+  #else
+    ## can't happen
+  #end
+#end

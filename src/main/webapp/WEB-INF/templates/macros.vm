@@ -97,7 +97,7 @@
         </div>
 #end
 
-## Render a list of columns as part of template displayu
+## Render a list of columns as part of template display
 #macro(listColumns $header $l)
         #if($l && !$l.isEmpty())
           <h4>$header</h4>
@@ -108,4 +108,15 @@
           </ul>
         #end
 
+#end
+
+## Render a single row in a hiearchical entry list
+#macro(hierEntry $member $narrow)
+    <div class="hlist-entry">
+        #if($member.getPropertyValue($narrow))
+        <a href="#" data-state="new" data-target="$uiroot/hlist?project=$lib.pathEncode($project)&concept=$lib.pathEncode($member.uRI)&narrow=$lib.pathEncode($narrow)" class="hlist-button"><span class="glyphicon glyphicon-plus-sign"></span></a>
+        #end
+        #linkfor($member)
+        #if($member.getPropertyValue("dct:description")) $member.getPropertyValue("dct:description")#end
+    </div>
 #end

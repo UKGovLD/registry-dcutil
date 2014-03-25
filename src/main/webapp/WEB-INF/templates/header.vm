@@ -1,11 +1,11 @@
-#set($uiroot="$root")
+#set($uiroot="$root/ui")
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="$uiroot/css/bootstrap.min.css" rel="stylesheet">
+    <link href="$root/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -15,13 +15,13 @@
     <![endif]-->
 
     <title>#if($pageTitle) $pageTitle #else Environment Registry data preparation #end</title>
-    <link type="text/css" rel="stylesheet" href="$uiroot/css/ui.css" />
-    <link type="text/css" rel="stylesheet" href="$uiroot/css/jquery.dataTables.css" />
-    <link href="$uiroot/css/bootstrap-editable.css" rel="stylesheet"/>
+    <link type="text/css" rel="stylesheet" href="$root/css/ui.css" />
+    <link type="text/css" rel="stylesheet" href="$root/css/jquery.dataTables.css" />
+    <link href="$root/css/bootstrap-editable.css" rel="stylesheet"/>
 
     #if($extraCSS)
       #foreach($file in $extraCSS.split(","))
-        <link type="text/css" rel="stylesheet" href="$uiroot/css/$file" />
+        <link type="text/css" rel="stylesheet" href="$root/css/$file" />
       #end
     #end
 
@@ -30,8 +30,8 @@
         <link type="text/css" rel="stylesheet" href="$file" />
       #end
     #end
-    <script type="text/javascript" src="$uiroot/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="$uiroot/js/jquery.form.js"></script>
+    <script type="text/javascript" src="$root/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="$root/js/jquery.form.js"></script>
   </head>
 
   <body>

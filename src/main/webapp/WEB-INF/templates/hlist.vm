@@ -1,0 +1,8 @@
+#set($uiroot="$root/ui")
+#set($p=$projectManager.getProject($project))
+#set($result = $p.wrappedResult)
+#set($parent = $result.model.getNode($concept))
+
+#foreach($child in $parent.listPropertyValues($narrow))
+  #hierEntry($child, $narrow)
+#end

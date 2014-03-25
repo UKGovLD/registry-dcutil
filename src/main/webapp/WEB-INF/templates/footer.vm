@@ -3,13 +3,13 @@
       </footer>
     </div> <!-- End of container -->
 
-    <script type="text/javascript" src="$uiroot/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="$uiroot/js/jquery.dataTables.min.js"></script>
-    <script src="$uiroot/js/bootstrap-editable.min.js"></script>
-    <script type="text/javascript" src="$uiroot/js/ui.js"></script>
+    <script type="text/javascript" src="$root/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="$root/js/jquery.dataTables.min.js"></script>
+    <script src="$root/js/bootstrap-editable.min.js"></script>
+    <script type="text/javascript" src="$root/js/ui.js"></script>
     #if($extraJS)
       #foreach($file in $extraJS.split(","))
-        <script type="text/javascript" src="$uiroot/js/$file"></script>
+        <script type="text/javascript" src="$root/js/$file"></script>
       #end
     #end
   </body>

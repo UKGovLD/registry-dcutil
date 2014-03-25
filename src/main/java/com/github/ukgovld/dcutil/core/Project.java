@@ -85,6 +85,10 @@ public class Project {
     public void setSourceFile(String sourceFile) {
         this.sourceFile = sourceFile;
         preview = null;
+    }
+    
+    public void resetSourceFile(String sourceFile) {
+        setSourceFile(sourceFile);
         result = null;
         templateName = null;
         resultFile = null;

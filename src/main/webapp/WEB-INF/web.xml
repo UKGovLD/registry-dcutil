@@ -58,7 +58,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 
   <filter-mapping>
     <filter-name>VelocityFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/ui/*</url-pattern>
   </filter-mapping>
 
   <listener>

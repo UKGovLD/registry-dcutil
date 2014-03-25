@@ -44,12 +44,10 @@ import com.epimorphics.appbase.templates.VelocityRender;
 import com.epimorphics.appbase.webapi.WebApiException;
 import com.epimorphics.dclib.storage.FileStore;
 import com.epimorphics.util.FileUtil;
-import com.epimorphics.util.NameUtils;
 import com.github.ukgovld.dcutil.core.DBProjectList;
 import com.github.ukgovld.dcutil.core.MetadataModel;
 import com.github.ukgovld.dcutil.core.Project;
 import com.github.ukgovld.dcutil.core.ProjectManager;
-import com.hp.hpl.jena.rdf.model.Model;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 
@@ -90,10 +88,10 @@ public class RequestProcessor {
     @Produces(FULL_MIME_TURTLE)
     public Response resultDownload(@PathParam("project") String projectID) throws IOException {
         Project project = projectManager.getProject(projectID);
-        return downloadresonse(project.getResult(), FULL_MIME_TURTLE, "output", "ttl");
+        return downloadresponse(project.getResult(), FULL_MIME_TURTLE, "output", "ttl");
     }
 
-    private Response downloadresonse(Object entity, String mime, String fname, String ext) {
+    private Response downloadresponse(Object entity, String mime, String fname, String ext) {
         ResponseBuilder builder = Response.ok().type(mime).entity(entity);
         builder.header(CONTENT_DISPOSITION_HEADER, String.format(CONTENT_DISPOSITION_FMT, fname, ext));
         return builder.build();
@@ -139,7 +137,7 @@ public class RequestProcessor {
         String filename = fileDetail.getFileName();
         uploadFile(filename, uploadedInputStream, project);
 
-        project.setSourceFile(filename);
+        project.resetSourceFile(filename);
         sync(project);
         return redirect(project, null);
     }
