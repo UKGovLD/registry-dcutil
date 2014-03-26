@@ -47,6 +47,12 @@ public class ProjectManager extends ComponentBase {
     protected String templateDir;
     protected LRUMap projectCache = new LRUMap(50);
     
+    /**
+     * Set a static template directory loaded in start up.
+     * 
+     * @deprecated configure a TemplateMonitor instead
+     * @param templateDir
+     */
     public void setTemplateDir(String  templateDir) {
         try { 
             File dir = asFile(templateDir);
