@@ -1,4 +1,4 @@
-# bootstreap fragment for formatting/mouting an EBS volume if present
+# bootstrap fragment for formatting/mounting an EBS volume if present
 
 # Configure runtime areas
 if ! blkid | grep /dev/xvdf; then
