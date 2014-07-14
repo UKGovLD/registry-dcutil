@@ -6,18 +6,10 @@
     "optional" : ["description", "note", "definition"],
     "oneOffs" : {
         "@id" : "{$dataset}",
-        "<rdf:type>" : [ "<reg:Register>", "<skos:Collection>"],
+        "<rdf:type>" : [ "<skos:Collection>"],
         "<ldp:membershipPredicate>" : "<skos:member>"
     },
-    "templates" : [ {
-        "@id" : "<{$base}/_{notation.toSegment()}>",
-        "<rdf:type>" : "<reg:RegisterItem>",
-        "<reg:status>" : "<reg:statusExperimental>",
-        "<reg:definition>" : "{$row.bnode}"
-    },{
-        "@id" : "{$row.bnode}",
-        "<reg:entity>" : "<{id}>"
-    },{
+    "templates" : {
         "@id" : "<{id}>",
         "<rdf:type>" : "<skos:Concept>",
         "<skos:notation>" : "{notation.toSegment()}",
@@ -27,5 +19,5 @@
         "<skos:definition>" : "{definition}",
         "<rdfs:label>" : "{label}",
         "^<skos:member>" : "{$dataset}"
-    } ]
+    } 
 }
