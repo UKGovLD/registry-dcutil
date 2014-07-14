@@ -143,7 +143,7 @@ public class Project {
             dc = new DataContext( pm.getDataContext() );
             if (localTemplateFile != null) {
                 InputStream is = readFile(localTemplateFile);
-                Template template = TemplateFactory.templateFrom(is, dc);
+                Template template = TemplateFactory.templateFrom(is, localTemplateFile, dc);
                 is.close();
                 dc.registerTemplate(templateName, template);
             }
