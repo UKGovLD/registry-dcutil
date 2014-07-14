@@ -1,0 +1,31 @@
+{       
+    "name" : "external-skos",
+    "description" : "Template for creating an code list of references to external URIs as a skos:Collection",
+    "type" : "Composite",
+    "required" : ["label", "notation", "id"],
+    "optional" : ["description", "note", "definition"],
+    "oneOffs" : {
+        "@id" : "{$dataset}",
+        "<rdf:type>" : [ "<reg:Register>", "<skos:Collection>"],
+        "<ldp:membershipPredicate>" : "<skos:member>"
+    },
+    "templates" : [ {
+        "@id" : "<{$base}/_{notation.toSegment()}>",
+        "<rdf:type>" : "<reg:RegisterItem>",
+        "<reg:status>" : "<reg:statusExperimental>",
+        "<reg:definition>" : "{$row.bnode}"
+    },{
+        "@id" : "{$row.bnode}",
+        "<reg:entity>" : "<{id}>"
+    },{
+        "@id" : "<{id}>",
+        "<rdf:type>" : "<skos:Concept>",
+        "<skos:notation>" : "{notation.toSegment()}",
+        "<dct:description>" : "{description}",
+        "<skos:prefLabel>" : "{label}",
+        "<skos:note>" : "{note}",
+        "<skos:definition>" : "{definition}",
+        "<rdfs:label>" : "{label}",
+        "^<skos:member>" : "{$dataset}"
+    } ]
+}
