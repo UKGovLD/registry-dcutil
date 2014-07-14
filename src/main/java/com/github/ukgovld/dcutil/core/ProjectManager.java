@@ -24,6 +24,7 @@ import com.epimorphics.appbase.core.ComponentBase;
 import com.epimorphics.dclib.framework.ConverterService;
 import com.epimorphics.dclib.framework.DataContext;
 import com.epimorphics.dclib.storage.FileStore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -74,6 +75,14 @@ public class ProjectManager extends ComponentBase {
         } catch (Exception e) {
             log.error("Failed to load templates directory", e);
         }
+    }
+    
+    /**
+     * Replace the default converter service with a configured service
+     */
+    @JsonIgnore 
+    public void setConverterService(ConverterService converterService) {
+        this.converterService = converterService;
     }
     
     /**
