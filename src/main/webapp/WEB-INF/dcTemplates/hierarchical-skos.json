@@ -6,7 +6,7 @@
     "optional" : ["label1", "label2","label3","label4","description", "note", "definition"],
     "oneOffs" : {
         "@id" : "{$dataset}",
-        "<rdf:type>" : [ "<reg:Register>", "<skos:ConceptScheme>"],
+        "<rdf:type>" : [ "<skos:ConceptScheme>"],
         "<reg:inverseMembershipPredicate>" : "<skos:inScheme>",
         "<http://purl.org/linked-data/registry-ui#hierarchyChildProperty>" : "<skos:narrower>",
         "<http://purl.org/linked-data/registry-ui#hierarchyRootProperty>" : "<skos:topConceptOf>"

@@ -6,7 +6,7 @@
     "optional" : ["description", "note", "definition"],
     "oneOffs" : {
         "@id" : "{$dataset}",
-        "<rdf:type>" : [ "<reg:Register>", "<skos:ConceptScheme>"],
+        "<rdf:type>" : [ "<skos:ConceptScheme>"],
         "<reg:inverseMembershipPredicate>" : "<skos:inScheme>"
     },
     "templates" : {
